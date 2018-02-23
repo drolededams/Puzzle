@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 10:49:05 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/02/22 11:37:16 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/02/23 13:47:49 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ int		main (int ac, char** av)
 		verif_puzzle(data);
 	}
 	else if (ac  == 1)
-		ft_putstr("Génération du puzzle\n");
+		generation(data);
 	else
 	{
 		ft_memdel((void**)data);

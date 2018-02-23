@@ -6,11 +6,11 @@
 #    By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/12 15:32:27 by dgameiro          #+#    #+#              #
-#    Updated: 2018/02/22 17:32:09 by dgameiro         ###   ########.fr        #
+#    Updated: 2018/02/23 13:55:32 by dgameiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = src/main.c src/strcomsplit.c src/verif.c src/math.c
+SRC = src/main.c src/strcomsplit.c src/verif.c src/math.c src/generation.c
 
 INC = -I./inc
 

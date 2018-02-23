@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:29:23 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/02/22 18:33:14 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/02/23 18:15:43 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	is_soluble(t_puzzle_data *data)
 	func_init(data);
 	while (++i < data->size * data->size)
 	{
-		data->state_coor[i] = where_is(data, i);
+		data->state_coor[i] = where_is(data, i);//a l'envers fait o(n) et non o(n^2)
 		data->goal_coor[i] = find_final_coor(data, i);
 	}
 	blank_dis = distance(data->state_coor[0], data->goal_coor[0]) % 2;
@@ -94,7 +94,7 @@ void	is_soluble(t_puzzle_data *data)
 	if (blank_dis == permutation)
 		ft_putendl("Puzzle Soluble");
 	else
-		ft_putendl("Puzzle insoluble");
+		exit_bad_puzzle(data, IMPOSSIBLE);
 }
 
 void	coor_alloc(t_puzzle_data *data)
@@ -132,10 +132,10 @@ int		permutation_calc(t_puzzle_data *data)
 	perm = 0;
 	copy = coor_copy(data->state_coor, data->size * data->size);//a voir copy
 	size = data->size * data->size - 1;
-	ft_putendl("copy");
+	/*ft_putendl("copy");
 	print_coor(copy, data);
 	ft_putendl("state");
-	print_coor(data->state_coor, data);
+	print_coor(data->state_coor, data);*/
 	while(i < size && j < size + 1)
 	{
 		if(copy[i].x != data->goal_coor[i].x ||
@@ -151,10 +151,10 @@ int		permutation_calc(t_puzzle_data *data)
 			j = i + 1;
 		}
 	}
-	ft_putendl("copy");
+	/*ft_putendl("copy");
 	print_coor(copy, data);
 	ft_putendl("state");
-	print_coor(data->state_coor, data);
+	print_coor(data->state_coor, data);*/
 	return (perm);
 }
 
@@ -166,7 +166,6 @@ void	swap_coor(t_coor	*copy, int i, int j)
 	copy[i] = copy[j];
 	copy[j] = tmp;
 }
-
 
 void print_coor(t_coor *coor, t_puzzle_data *data)
 {
@@ -182,13 +181,3 @@ void print_coor(t_coor *coor, t_puzzle_data *data)
 	  i++;
 	}
 }
-
-
-
-
-
-
-
-
-
-

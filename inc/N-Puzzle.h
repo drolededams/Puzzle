@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:03:58 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/02/22 18:26:38 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/02/23 17:56:43 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "../libft/includes/libft.h"
 # include <fcntl.h>
 # include <stdio.h>
+# include <time.h>
 # define BAD_LINE 1
 # define SIZES 2
 # define TOO_LOW 3
@@ -69,4 +70,13 @@ void	swap_coor(t_coor	*copy, int i, int j);
 void	coor_alloc(t_puzzle_data *data);
 void	print_coor(t_coor *coor, t_puzzle_data *data);
 t_coor	*coor_copy(t_coor *coor, int size);
+void generation(t_puzzle_data *data);
+int size_verif(char *s);
+int		is_num(char *s);
+void	make_npuzzle(t_puzzle_data *data);
+void print_tabint(int *tab, int n);
+void	random_tab(int *rand, int n);
+void swap_tabint(int *tab, int a, int b);
+t_coor	coor_modulo(int i, int n);
+void	random_is_soluble(t_puzzle_data *data, int *tab);
 #endif
