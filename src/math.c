@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 11:40:13 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/02/22 17:36:00 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/02/26 18:07:11 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,70 +18,66 @@
 }
 */
 
-int		distance(t_coor a, t_coor b)
+int		distance(int a, int b, int size)
 {
-	return (ft_sqrt(ft_power(a.x - b.x, 2)) + ft_sqrt(ft_power(a.y - b.y, 2)));
+	return (ft_sqrt(ft_power((a / size) - (b / size), 2)) + ft_sqrt(ft_power((a % size) - (b % size), 2)));
 }
 
-void	func_init(t_puzzle_data *data)
+int		coor_top(int d, int v, int im, int size)
 {
-	data->coor[0] = coor_top;
-	data->coor[1] = coor_right;
-	data->coor[2] = coor_bottom;
-	data->coor[3] = coor_left;
-}
-
-t_coor	coor_top(int d, int v, int im)
-{
-	t_coor c;
+	int x;
+	int y;
 
 	im = 0;
-	c.x = d + v - 1;
-	c.y = d;
-	return (c);
+	x = d + v - 1;
+	y = d;
+	return (y * (size) + x);
 }
 
-t_coor	coor_right(int d, int v, int im)
+int		coor_right(int d, int v, int im, int size)
 {
-	t_coor c;
+	int x;
+	int y;
 
-	c.x = im;
-	c.y = d + v;
-	return (c);
+	x = im;
+	y = d + v;
+	return (y * (size) + x);
 }
 
-t_coor	coor_bottom(int d, int v, int im)
+int		coor_bottom(int d, int v, int im, int size)
 {
-	t_coor c;
-	
+	int x;
+	int y;
+
 	d = 0;
-	c.x = im - v;
-	c.y = im;
-	return (c);
+	x = im - v;
+	y = im;
+	return (y * (size) + x);
 }
 
-t_coor	coor_left(int d, int v, int im)
+int		coor_left(int d, int v, int im, int size)
 {
-	t_coor c;
+	int x;
+	int y;
 
-	c.x = d;
-	c.y = im - v;
-	return (c);
+	x = d;
+	y = im - v;
+	return (y * (size) + x);
 }
 
-t_coor find_final_coor(t_puzzle_data *data, int value)
+int		find_final_coor(t_puzzle_data *data, int value)
 {
 	int corner;
 	int border_d;
 	int seg_size;
 	int side;
 	int indice_max;
-	
+
 	if (value == 0)
 		value = data->size * data->size;
 	corner = 0;
 	seg_size = data->size;
-	while(value > seg_size)
+	while (value > seg_size)
 	{
 		value -= seg_size;
 		corner += 1;
@@ -90,5 +86,35 @@ t_coor find_final_coor(t_puzzle_data *data, int value)
 	border_d = corner / 4;
 	side = corner % 4;
 	indice_max = data->size - 1 - border_d;
-	return (data->coor[side](border_d, value, indice_max));
+	return (data->coor[side](border_d, value, indice_max, data->size));
+}
+
+int		permutation_calc(t_puzzle_data *data)
+{
+	int i;
+	int j;
+	int size;
+	int perm;
+	int *copy;
+
+	i = 0;
+	j = 1;
+	perm = 0;
+	copy = tab_copy(data->state_coor, data->size * data->size);
+	size = data->size * data->size - 1;
+	while (i < size && j < size + 1)
+	{
+		if (copy[i] != data->goal_coor[i])
+		{
+			swap_tabint(copy, i, j);
+			j++;
+			perm++;
+		}
+		else
+		{
+			i++;
+			j = i + 1;
+		}
+	}
+	return (perm);
 }
