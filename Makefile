@@ -6,12 +6,12 @@
 #    By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/12 15:32:27 by dgameiro          #+#    #+#              #
-#    Updated: 2018/02/28 17:51:30 by dgameiro         ###   ########.fr        #
+#    Updated: 2018/02/28 19:05:03 by dgameiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = src/main.c src/strcomsplit.c src/verif.c src/math.c src/generation.c src/exit.c src/parsing.c src/lib.c src/print.c src/mem.c \
-	  src/heap.c
+	  src/heap.c src/tree.c
 
 INC = -I./inc
 

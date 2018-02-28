@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:03:58 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/02/28 18:24:35 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/02/28 19:06:33 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ typedef struct		s_state
 	int		i_heap;
 	int		hash;
 	int		closed;
-	struct s_state *pre;
-	struct s_state *sl;
-	struct s_state *sr;
 	int		*coor;
 	int		*value;
+	struct s_state *pre;
+	struct s_state *left;
+	struct s_state *right;
 }					t_state;
 
 typedef struct		s_heap
@@ -111,7 +111,6 @@ void	random_tab(int *tab, int n);
 void swap_tabint(int *tab, int a, int b);
 void	print_puzzle(int *tab, int n);
 
-
 t_heap		*mem_heap(void);
 void	realloc_heap(t_heap *heap);
 void	push_heap(t_heap *heap, t_state *state);
@@ -119,4 +118,7 @@ t_state		*pop_heap(t_heap *heap);
 void	up_heap(t_heap *heap, int i);
 void		down_heap(t_heap *heap);
 void		free_heap(t_heap *heap);
+
+void	add_node(t_state **root, t_state *state);
+t_state		*search_node(t_state *root, uint64_t id);
 #endif

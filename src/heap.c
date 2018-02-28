@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 14:33:34 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/02/28 17:57:50 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/02/28 19:11:27 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,34 +25,34 @@ t_heap		*mem_heap(void)
 	return (heap);
 }
 
-void	realloc_heap(t_heap *heap)
+void		realloc_heap(t_heap *heap)
 {
 	t_state **tmp;
 
 	H_MAX = H_MAX << 1;
-	if(!(tmp = (t_state**)realloc(heap->tab, sizeof(t_state*) * H_MAX)))
+	if (!(tmp = (t_state**)realloc(heap->tab, sizeof(t_state*) * H_MAX)))
 		exit_alloc_failed();
 	else
 		heap->tab = tmp;
 }//fonctions a test
 
-void	push_heap(t_heap *heap, t_state *state)
+void		push_heap(t_heap *heap, t_state *state)
 {
 	H_SIZE++;
-	if(H_SIZE >= H_MAX)
+	if (H_SIZE >= H_MAX)
 		realloc_heap(heap);
 	H_LAST = state;
-	if(H_SIZE != 1)
+	if (H_SIZE != 1)
 		up_heap(heap, H_SIZE);
 }
 
-void	up_heap(t_heap *heap, int i)
+void		up_heap(t_heap *heap, int i)
 {
-	int father;
-	t_state *tmp;
+	int		father;
+	t_state	*tmp;
 
 	father = i >> 1;
-	while(H_FATH_F > H_I_F && i > 1)
+	while (H_FATH_F > H_I_F && i > 1)
 	{
 		tmp = H_FATH;
 		H_FATH = H_I;
@@ -66,8 +66,8 @@ t_state		*pop_heap(t_heap *heap)
 {
 	t_state *best;
 
-	if(!H_SIZE)
-		return NULL;
+	if (!H_SIZE)
+		return (NULL);
 	best = heap->tab[1];
 	heap->tab[1] = H_LAST;
 	H_SIZE--;
@@ -85,7 +85,7 @@ void		down_heap(t_heap *heap)
 	i_down = 2;
 	while (i_down <= H_SIZE)
 	{
-		if(i_down + 1 <= H_SIZE &&  H_DOWN_F > H_DOWN_1_F )
+		if (i_down + 1 <= H_SIZE && H_DOWN_F > H_DOWN_1_F)
 			i_down++;
 		if (H_DOWN_F < H_UP_F)
 		{
