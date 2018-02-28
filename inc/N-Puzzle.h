@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:03:58 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/02/26 17:36:54 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/02/28 18:24:35 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "../libft/includes/libft.h"
 # include <fcntl.h>
 # include <stdio.h>
+# include <stdint.h>
 # include <time.h>
 # define BAD_LINE 1
 # define SIZES 2
@@ -23,6 +24,21 @@
 # define BAD_FILE 5
 # define NUMBER_MISSING 1
 # define IMPOSSIBLE 2
+# define H_SIZE heap->size
+# define H_MAX heap->max
+# define H_LAST heap->tab[heap->size]
+# define H_I heap->tab[i]
+# define H_I_F H_I->cost + H_I->heu
+# define H_FATH heap->tab[father]
+# define H_FATH_F H_FATH->cost + H_FATH->heu
+# define H_DOWN heap->tab[i_down]
+# define H_DOWN_1 heap->tab[i_down + 1]
+# define H_DOWN_F heap->tab[i_down]->cost + heap->tab[i_down]->heu
+# define H_DOWN_1_F heap->tab[i_down + 1]->cost + heap->tab[i_down + 1]->heu
+# define H_UP heap->tab[i_up]
+# define H_UP_F heap->tab[i_up]->cost + heap->tab[i_up]->heu
+# define HASH state->hash
+# define ID state->id
 
 typedef struct		s_puzzle_data
 {
@@ -33,6 +49,28 @@ typedef struct		s_puzzle_data
 	int* goal_coor;
 	int		(*coor[4])(int d, int v, int im, int size);
 }					t_puzzle_data;
+
+typedef struct		s_state
+{
+	uint64_t id;
+	int		cost;
+	int		heu;
+	int		i_heap;
+	int		hash;
+	int		closed;
+	struct s_state *pre;
+	struct s_state *sl;
+	struct s_state *sr;
+	int		*coor;
+	int		*value;
+}					t_state;
+
+typedef struct		s_heap
+{
+	t_state		**tab;
+	int			size;
+	int			max;
+}					t_heap;
 
 void	get_file(char *file, t_puzzle_data *data);
 int		good_line(char *line);
@@ -72,4 +110,13 @@ void print_coor(int *tab, int n);
 void	random_tab(int *tab, int n);
 void swap_tabint(int *tab, int a, int b);
 void	print_puzzle(int *tab, int n);
+
+
+t_heap		*mem_heap(void);
+void	realloc_heap(t_heap *heap);
+void	push_heap(t_heap *heap, t_state *state);
+t_state		*pop_heap(t_heap *heap);
+void	up_heap(t_heap *heap, int i);
+void		down_heap(t_heap *heap);
+void		free_heap(t_heap *heap);
 #endif
