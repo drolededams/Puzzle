@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 14:33:34 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/02/28 19:11:27 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/01 19:18:29 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void		push_heap(t_heap *heap, t_state *state)
 	if (H_SIZE >= H_MAX)
 		realloc_heap(heap);
 	H_LAST = state;
+	state->i_heap = H_SIZE;
 	if (H_SIZE != 1)
 		up_heap(heap, H_SIZE);
 }
@@ -49,14 +50,18 @@ void		push_heap(t_heap *heap, t_state *state)
 void		up_heap(t_heap *heap, int i)
 {
 	int		father;
-	t_state	*tmp;
+	int		i_heap_tmp;
+	t_state	*s_tmp;
 
 	father = i >> 1;
 	while (H_FATH_F > H_I_F && i > 1)
 	{
-		tmp = H_FATH;
+		s_tmp = H_FATH;
+		i_heap_tmp = H_FATH_IH;
 		H_FATH = H_I;
-		H_I = tmp;
+		H_FATH_IH = H_I_IH;
+		H_I = s_tmp;
+		H_I_IH = i_heap_tmp;
 		i = father;
 		father = father >> 1;
 	}
@@ -69,7 +74,9 @@ t_state		*pop_heap(t_heap *heap)
 	if (!H_SIZE)
 		return (NULL);
 	best = heap->tab[1];
+	best->i_heap = 0;
 	heap->tab[1] = H_LAST;
+	heap->tab[1]->i_heap = 1;
 	H_SIZE--;
 	down_heap(heap);
 	return (best);
@@ -91,7 +98,9 @@ void		down_heap(t_heap *heap)
 		{
 			tmp = H_DOWN;
 			H_DOWN = H_UP;
+			H_DOWN_IH = i_up;
 			H_UP = tmp;
+			H_UP_IH = i_down;
 		}
 		i_up = i_down;
 		i_down = i_down << 1;

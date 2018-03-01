@@ -6,17 +6,28 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 11:40:13 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/02/26 18:07:11 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/01 18:55:17 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "N-Puzzle.h"
 
-/*int		manhattan_dist()
+int		manhattan_dist(unsigned int *state, unsigned int *goal, unsigned int size)
 {
+	unsigned int i;
+	int heu;
+	int sqrt;
 
+	i = 0;
+	heu = 0;
+	sqrt = ft_sqrt(size);
+	while(i < size)
+	{
+		heu += distance(state[i], goal[i], sqrt);
+		i++;
+	}
+	return (heu);
 }
-*/
 
 int		distance(int a, int b, int size)
 {
@@ -95,16 +106,16 @@ int		permutation_calc(t_puzzle_data *data)
 	int j;
 	int size;
 	int perm;
-	int *copy;
+	unsigned int *copy;
 
 	i = 0;
 	j = 1;
 	perm = 0;
 	copy = tab_copy(data->state_coor, data->size * data->size);
 	size = data->size * data->size - 1;
-	while (i < size && j < size + 1)
+	while (i < size)
 	{
-		if (copy[i] != data->goal_coor[i])
+		if (copy[i] != data->goal_coor[i] && j < size + 1)
 		{
 			swap_tabint(copy, i, j);
 			j++;

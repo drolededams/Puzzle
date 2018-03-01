@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:29:23 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/02/26 17:59:48 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/01 18:17:23 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	good_numbers(t_puzzle_data *data)
 			exit_bad_puzzle(data, NUMBER_MISSING);
 }
 
-int		is_in_puzzle(t_puzzle_data *data, int n)
+int		is_in_puzzle(t_puzzle_data *data, unsigned int n)
 {
 	int i;
 	int j;
@@ -67,7 +67,10 @@ void	is_soluble(t_puzzle_data *data, int random)
 	ft_putendl("sol");
 	print_coor(data->goal_coor, n);
 	if (blank_dis == permutation)
+	{
 		ft_putendl("Puzzle Soluble");
+		start_a(data);
+	}
 	else if (random)
 	{
 		ft_putendl("Puzzle Non Soluble. Generation d'un nouveau");

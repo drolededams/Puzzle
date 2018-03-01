@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mem.c                                              :+:      :+:    :+:   */
+/*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/26 15:57:48 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/01 14:18:56 by dgameiro         ###   ########.fr       */
+/*   Created: 2018/03/01 16:30:22 by dgameiro          #+#    #+#             */
+/*   Updated: 2018/03/01 19:21:08 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "N-Puzzle.h"
 
-void	mem_puzzle(t_puzzle_data *data)
+void	start_a(t_puzzle_data *data)
 {
-	if (!(data->puzzle = (unsigned int*)malloc(sizeof(unsigned int) * data->size * data->size)))
-		exit_alloc_failed();
-}
+	t_state	*start;
+	t_heap	*heap;
+	unsigned int size;
 
-void	coor_alloc(t_puzzle_data *data)
-{
-	if (!(data->state_coor = (unsigned int*)malloc(sizeof(int) * ft_power(data->size, 2))))
-		exit_alloc_failed();
-	if (!(data->goal_coor = (unsigned int*)malloc(sizeof(unsigned int) * ft_power(data->size, 2))))
-		exit_alloc_failed();
+	size = data->size * data->size;
+	start = mem_state_4(id_state(data->state_coor, size), NULL, size, data->goal_coor);
+	heap = mem_heap();
+	push_heap(heap, start);
+	ft_putendl("yes ?");
+	print_coor(heap->tab[1]->value, size);
 }

@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 12:03:29 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/02/26 20:15:22 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/01 14:30:31 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	make_npuzzle(t_puzzle_data *data, int n)
 	is_soluble(data, 1);
 }
 
-void	random_tab(int *tab, int n)
+void	random_tab(unsigned int *tab, int n)
 {
 	int i;
 

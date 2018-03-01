@@ -6,13 +6,13 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:47:13 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/02/26 20:15:20 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/01 18:27:14 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "N-Puzzle.h"
 
-void	print_puzzle(int *tab, int n)
+void	print_puzzle(unsigned int *tab, int n)
 {
 	int i;
 	int j;
@@ -34,16 +34,31 @@ void	print_puzzle(int *tab, int n)
 	}
 }
 
-void	print_coor(int *tab, int n)
+void	print_coor(unsigned int *tab, int n)
 {
-	int *puz;
+	unsigned int *puz;
 	int i;
 
-	if (!(puz = (int*)malloc(sizeof(int) * n)))
+	if (!(puz = (unsigned int*)malloc(sizeof(unsigned int) * n)))
 		exit_alloc_failed(); //liberation memoire a faire
 	i = -1;
 	while (++i < n)
 		puz[tab[i]] = i;
 	print_puzzle(puz, n);
 	ft_memdel((void*)&puz);
+}
+
+void	print_tabint(unsigned int *tab, int n)
+{
+	int i;
+
+	i = 0;
+	while (i < n)
+	{
+		ft_putnbr(i);
+		ft_putstr(" = ");
+		ft_putnbr(tab[i++]);
+		ft_putstr(" | ");
+	}
+		ft_putchar('\n');
 }
