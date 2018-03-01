@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:03:58 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/01 19:21:45 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/01 20:12:57 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,13 +126,16 @@ void		free_heap(t_heap *heap);
 
 void	add_node(t_state **root, t_state *state);
 t_state		*search_node(t_state *root, uint64_t id);
+t_state		**mem_hash_table(void);
 
 
 t_state		*mem_state_4(uint64_t id, t_state *pre, unsigned int size, unsigned int *goal);
 void	puz_state(t_state *state, unsigned int size);
 uint64_t	id_state(unsigned int *tab, unsigned int size);
+unsigned int hash_table(uint64_t id);
 
-void	start_a(t_puzzle_data *data);
+void	pre_start_a(t_puzzle_data *data);
+void	start_a(t_heap *heap, unsigned int id_goal, t_state **hash_tab, unsigned int size);
 
 int		manhattan_dist(unsigned int *state, unsigned int *goal, unsigned int size);
 #endif

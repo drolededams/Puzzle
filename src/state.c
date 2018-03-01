@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 19:12:45 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/01 19:17:28 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/01 20:37:07 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_state		*mem_state_4(uint64_t id, t_state *pre, unsigned int size, unsigned int
 	if (!(state->value = (unsigned int*)malloc(sizeof(unsigned int) * size)))
 		exit_alloc_failed();
 	if (!(state->coor = (unsigned int*)malloc(sizeof(unsigned int) * size)))
-		exit_alloc_failed();
+		exit_alloc_failed(); //state_corr sert ptete a rien
 	state->id = id;
 	state->pre = pre;
 	state->left = NULL;
@@ -57,4 +57,9 @@ uint64_t	id_state(unsigned int *tab, unsigned int size)
 		i++;
 	}
 	return (id);
+}
+
+unsigned int hash_table(uint64_t id)
+{
+	return (id & 1023);
 }

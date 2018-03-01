@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:03:06 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/02/28 19:08:24 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/01 19:58:20 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,17 @@ t_state		*search_node(t_state *root, uint64_t id)
 	}
 	return (NULL);
 }
+
+t_state		**mem_hash_table(void)
+{
+	t_state **hash;
+	int i;
+
+	if (!(hash = (t_state**)malloc(sizeof(t_state*) * 1024)))
+		exit_alloc_failed();
+	i = 0;
+	while (i < 1024)
+		hash[i++] = NULL;
+	return (hash);
+}// a free
+

@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:29:23 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/01 18:17:23 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/01 19:59:33 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	is_soluble(t_puzzle_data *data, int random)
 	if (blank_dis == permutation)
 	{
 		ft_putendl("Puzzle Soluble");
-		start_a(data);
+		pre_start_a(data);
 	}
 	else if (random)
 	{
