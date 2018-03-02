@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 14:33:34 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/01 19:18:29 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/02 18:49:53 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		up_heap(t_heap *heap, int i)
 	t_state	*s_tmp;
 
 	father = i >> 1;
-	while (H_FATH_F > H_I_F && i > 1)
+	while (i> 1 && H_FATH_F > H_I_F)
 	{
 		s_tmp = H_FATH;
 		i_heap_tmp = H_FATH_IH;
@@ -75,10 +75,17 @@ t_state		*pop_heap(t_heap *heap)
 		return (NULL);
 	best = heap->tab[1];
 	best->i_heap = 0;
-	heap->tab[1] = H_LAST;
-	heap->tab[1]->i_heap = 1;
+	//printf("%u size\n", H_SIZE);
+	if (H_SIZE == 1)
+		heap->tab[1] = NULL;
+	else
+	{
+		heap->tab[1] = H_LAST;
+		heap->tab[1]->i_heap = 1;
+	}
 	H_SIZE--;
-	down_heap(heap);
+	if(H_SIZE)
+		down_heap(heap);
 	return (best);
 }
 

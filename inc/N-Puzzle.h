@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:03:58 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/01 20:12:57 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/02 16:47:40 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ void print_coor(unsigned int *tab, int n);
 void	random_tab(unsigned int *tab, int n);
 void swap_tabint(unsigned int *tab, int a, int b);
 void	print_puzzle(unsigned int *tab, int n);
-void		print_bits(uint64_t n);
 void	print_tabint(unsigned int *tab, int n);
+void		print_bits(uint64_t n);
 
 t_heap		*mem_heap(void);
 void	realloc_heap(t_heap *heap);
@@ -128,14 +128,17 @@ void	add_node(t_state **root, t_state *state);
 t_state		*search_node(t_state *root, uint64_t id);
 t_state		**mem_hash_table(void);
 
-
 t_state		*mem_state_4(uint64_t id, t_state *pre, unsigned int size, unsigned int *goal);
 void	puz_state(t_state *state, unsigned int size);
 uint64_t	id_state(unsigned int *tab, unsigned int size);
 unsigned int hash_table(uint64_t id);
+uint64_t	left_tile(t_state *state, unsigned int size);
+uint64_t	right_tile(t_state *state, unsigned int size);
+uint64_t	up_tile(t_state *state, unsigned int size);
+uint64_t	down_tile(t_state *state, unsigned int size);
 
 void	pre_start_a(t_puzzle_data *data);
-void	start_a(t_heap *heap, unsigned int id_goal, t_state **hash_tab, unsigned int size);
+void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab, unsigned int size, uint64_t (*move[4])(t_state *, unsigned int), unsigned int *goal_coor);
 
 int		manhattan_dist(unsigned int *state, unsigned int *goal, unsigned int size);
 #endif

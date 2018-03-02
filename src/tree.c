@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:03:06 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/01 19:58:20 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:46:34 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ void		add_node(t_state **root, t_state *state)
 
 t_state		*search_node(t_state *root, uint64_t id)
 {
+	//printf("test id = %" PRIu64 "\n", id);
 	if (root)
 	{
+		//printf("root id = %" PRIu64 "\n", root->id);
 		if (root->id == id)
 			return (root); // a modifier pour puzzle > 4
 		if (root->id > id)

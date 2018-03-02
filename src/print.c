@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:47:13 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/01 18:27:14 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/02 15:53:14 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,30 @@ void	print_tabint(unsigned int *tab, int n)
 		ft_putstr(" | ");
 	}
 		ft_putchar('\n');
+}
+
+void		print_bits(uint64_t n)
+{
+	uint64_t maxpow;
+	int i;
+	int j;
+
+	maxpow = 1 << 31;
+	maxpow = maxpow << 31;
+	maxpow = maxpow << 1;
+	i = 0;
+	j = 0;
+	printf("%" PRIu64 "\n", n);
+	while (i < 64)
+	{
+		while (j < 4)
+		{
+			printf("%u ", !!(n & maxpow));
+			i++;
+			j++;
+			n = n << 1;
+		}
+		printf("\n");
+		j = 0;
+	}
 }

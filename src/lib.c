@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:43:42 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/01 16:22:51 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/02 15:53:22 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,30 +61,4 @@ unsigned int		*tab_copy(unsigned int *tab, int size)
 	while (++i < size)
 		copy[i] = tab[i];
 	return (copy);
-}
-
-void		print_bits(uint64_t n)
-{
-	uint64_t maxpow;
-	int i;
-	int j;
-
-	maxpow = 1 << 31;
-	maxpow = maxpow << 31;
-	maxpow = maxpow << 1;
-	i = 0;
-	j = 0;
-	printf("%" PRIu64 "\n", n);
-	while (i < 64)
-	{
-		while (j < 4)
-		{
-			printf("%u ", !!(n & maxpow));
-			i++;
-			j++;
-			n = n << 1;
-		}
-		printf("\n");
-		j = 0;
-	}
 }

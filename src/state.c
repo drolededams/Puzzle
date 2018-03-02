@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 19:12:45 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/01 20:37:07 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/02 17:42:09 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,82 @@ uint64_t	id_state(unsigned int *tab, unsigned int size)
 unsigned int hash_table(uint64_t id)
 {
 	return (id & 1023);
+}
+
+uint64_t	down_tile(t_state *state, unsigned int size)
+{
+	uint64_t id_successor;
+	uint64_t blank;
+	uint64_t shifted;
+
+	if (state->value[0] / size == 0)
+		return (0);
+	else
+	{
+		id_successor = state->id;
+		blank = 15;
+		shifted = state->coor[state->value[0] - size];
+		id_successor &= ~(blank << (state->value[0] - size) * 4);
+		id_successor |= shifted << (state->value[0] * 4);
+	}
+	return (id_successor);
+}
+
+uint64_t	up_tile(t_state *state, unsigned int size)
+{
+	uint64_t id_successor;
+	uint64_t blank;
+	uint64_t shifted;
+	uint64_t test;
+
+	if (state->value[0] / size == size - 1)
+		return (0);
+	else
+	{
+		id_successor = state->id;
+		blank = 15;
+		shifted = state->coor[state->value[0] + size];
+		test = ~(blank << (state->value[0] + size) * 4);
+		id_successor &= ~(blank << (state->value[0] + size) * 4);
+		id_successor |= shifted << (state->value[0] * 4);
+	}
+	return (id_successor);
+}
+
+uint64_t	right_tile(t_state *state, unsigned int size)
+{
+	uint64_t id_successor;
+	uint64_t blank;
+	uint64_t shifted;
+
+	if (state->value[0] % size == 0)
+		return (0);
+	else
+	{
+		id_successor = state->id;
+		blank = 15;
+		shifted = state->coor[state->value[0] - 1];
+		id_successor &= ~(blank << (state->value[0] - 1) * 4);
+		id_successor |= shifted << (state->value[0] * 4);
+	}
+	return (id_successor);
+}
+
+uint64_t	left_tile(t_state *state, unsigned int size)
+{
+	uint64_t id_successor;
+	uint64_t blank;
+	uint64_t shifted;
+
+	if (state->value[0] % size == size - 1)
+		return (0);
+	else
+	{
+		id_successor = state->id;
+		blank = 15;
+		shifted = state->coor[state->value[0] + 1];
+		id_successor &= ~(blank << (state->value[0] + 1) * 4);
+		id_successor |= shifted << (state->value[0] * 4);
+	}
+	return (id_successor);
 }
