@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 11:40:13 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/01 18:55:17 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/02 20:38:00 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		manhattan_dist(unsigned int *state, unsigned int *goal, unsigned int size)
 	int heu;
 	int sqrt;
 
-	i = 0;
+	i = 1;
 	heu = 0;
 	sqrt = ft_sqrt(size);
 	while(i < size)

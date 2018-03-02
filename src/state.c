@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 19:12:45 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/02 17:42:09 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/02 22:19:43 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,17 @@ uint64_t	id_state(unsigned int *tab, unsigned int size)
 
 unsigned int hash_table(uint64_t id)
 {
-	return (id & 1023);
+	unsigned int x;
+	unsigned int i;
+
+	x = 1;
+	i = 0;
+	while(x != 0)
+	{
+		x = (id >> 4 * i) & 0xF;
+		i++;
+	}
+	return ((id & 1023));
 }
 
 uint64_t	down_tile(t_state *state, unsigned int size)

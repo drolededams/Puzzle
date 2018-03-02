@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:30:22 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/02 18:49:51 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/02 21:37:28 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,31 +44,17 @@ void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab, unsigned int si
 	int success;
 	int i;
 	int count;
+	int count_2;
 	uint64_t id_successor;
 	t_state *state;
 	t_state *successor;
-	//int j = 1;
-	int k = 0;
-
 	success = 0;
 	count = 0;
-	while (k++ < 11 && H_SIZE > 0 && !success)
+	count_2 = 1;
+	while (H_SIZE > 0 && !success)
 	{
 		count++;
-		//ft_putnbr(count);
-		//ft_putchar('\n');
 		state = pop_heap(heap); 
-		printf("state turn = %" PRIu64 "\n", state->id);
-		//printf("haste state = %u \n", hash_table(state->id));
-		/*j = 1;
-		printf("tour = %d \n", k);
-		while(j <= H_SIZE)
-		{
-			printf("heap = %d ->>>>", j);
-			printf("%" PRIu64 "\n", heap->tab[j]->id);
-			j++;
-		}*/
-		//printf("%" PRIu64 "\n", state->id);
 		if (state->id == id_goal)
 			success = 1;
 		else
@@ -78,19 +64,16 @@ void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab, unsigned int si
 			{
 				if ((id_successor = move[i](state, ft_sqrt(size))))
 				{
-					//printf("%" PRIu64 "\n", id_successor);
 					if (!(successor = search_node(hash_tab[hash_table(id_successor)], id_successor)))
 					{
+						count_2++;
 						successor = mem_state_4(id_successor, state, size, goal_coor);
-						//printf("%" PRIu64 " Created \n", id_successor);
+						successor->cost = state->cost + 1;
 						push_heap(heap, successor);
 						add_node(&hash_tab[hash_table(successor->id)], successor);
-						successor->cost = state->cost + 1;
 					}
 					else if (successor->cost > state->cost + 1)
 					{
-						//printf("successor cost : %d \n", successor->cost);
-						//printf("state cost : %d \n", successor->cost + 1);
 						successor->pre = state;
 						successor->cost = state->cost + 1;
 						if(!successor->i_heap)
@@ -101,21 +84,25 @@ void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab, unsigned int si
 				}
 			}
 		}
-		/*j = 1;
-		printf("tour fin = %d \n", k);
-		while(j <= H_SIZE)
-		{
-			printf("heap = %d ->>>>", j);
-			printf("%" PRIu64 "\n", heap->tab[j]->id);
-			printf("cost = %d \n", heap->tab[j]->cost);
-			j++;
-		}*/
 	}
+	int tour;
+	tour = 0;
 	ft_putendl("Display result");
 	while(state != NULL)
 	{
+		tour++;
 		print_coor(state->value, size);
+		printf("%" PRIu64 "\n", state->id);
+		printf("heuristique = %u \n", state->heu);
+		printf("cout = %u \n", state->cost);
+		printf("hash = %u \n", hash_table(state->id));
 		ft_putendl("pre");
 		state = state->pre;
 	}
+	printf("etape = %d \n", tour);
+	printf("cout memoire = %d \n", count_2);
+	ft_putnbr(count);
+	ft_putchar('\n');
+	ft_putnbr(H_SIZE);
+	ft_putchar('\n');
 }

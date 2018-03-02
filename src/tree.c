@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:03:06 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/02 17:46:34 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/02 21:54:27 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,14 @@ void		add_node(t_state **root, t_state *state)
 
 t_state		*search_node(t_state *root, uint64_t id)
 {
-	//printf("test id = %" PRIu64 "\n", id);
 	if (root)
 	{
-		//printf("root id = %" PRIu64 "\n", root->id);
 		if (root->id == id)
 			return (root); // a modifier pour puzzle > 4
 		if (root->id > id)
-			search_node(root->left, id);
+			return(search_node(root->left, id));
 		else
-			search_node(root->right, id);
+			return(search_node(root->right, id));
 	}
 	return (NULL);
 }
@@ -43,10 +41,10 @@ t_state		**mem_hash_table(void)
 	t_state **hash;
 	int i;
 
-	if (!(hash = (t_state**)malloc(sizeof(t_state*) * 1024)))
+	if (!(hash = (t_state**)malloc(sizeof(t_state*) * 1039)))
 		exit_alloc_failed();
 	i = 0;
-	while (i < 1024)
+	while (i < 1039)
 		hash[i++] = NULL;
 	return (hash);
 }// a free
