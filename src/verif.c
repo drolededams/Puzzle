@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:29:23 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/01 19:59:33 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/05 19:00:17 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,58 +23,65 @@ void	verif_puzzle(t_puzzle_data *data)
 
 void	good_numbers(t_puzzle_data *data)
 {
-	int i;
+	unsigned int i;
 
-	i = -1;
-	while (++i < data->size * data->size)
+	i = 0;
+	while (i < data->area)
+	{
 		if (!(is_in_puzzle(data, i)))
 			exit_bad_puzzle(data, NUMBER_MISSING);
+		i++;
+	}
 }
 
 int		is_in_puzzle(t_puzzle_data *data, unsigned int n)
 {
-	int i;
-	int j;
+	unsigned int i;
 
-	i = -1;
-	j = data->size * data->size;
-	while (++i < j)
+	i = 0;
+	while (i < data->area)
+	{
 		if (data->puzzle[i] == n)
 			return (1);
+		i++;
+	}
 	return (0);
 }
 
 void	is_soluble(t_puzzle_data *data, int random)
 {
-	int i;
+	unsigned int i;
 	int blank_dis;
 	int permutation;
-	int n;
+	int final_coor;
 
-	i = -1;
+	i = 0;
 	coor_alloc(data);
 	func_init(data);
-	n = data->size * data->size;
-	while (++i < n)
+	while (i < data->area)
 	{
 		data->state_coor[data->puzzle[i]] = i;
-		data->goal_coor[data->puzzle[i]] = find_final_coor(data, data->puzzle[i]);
+		final_coor = find_final_coor(data, data->puzzle[i]);
+		data->goal_coor[data->puzzle[i]] = final_coor;
+		data->goal_value[final_coor] = data->puzzle[i];
+		i++;
 	}
 	blank_dis = distance(data->state_coor[0], data->goal_coor[0], data->size) % 2;
 	permutation = permutation_calc(data) % 2;
 	ft_putendl("gen");
-	print_coor(data->state_coor, n);
+	print_coor(data->state_coor, data->area);
 	ft_putendl("sol");
-	print_coor(data->goal_coor, n);
+	print_coor(data->goal_coor, data->area);
 	if (blank_dis == permutation)
 	{
 		ft_putendl("Puzzle Soluble");
+		search_choice(data);
 		pre_start_a(data);
 	}
 	else if (random)
 	{
 		ft_putendl("Puzzle Non Soluble. Generation d'un nouveau");
-		make_npuzzle(data, n);
+		make_npuzzle(data);
 	}
 	else
 		exit_bad_puzzle(data, IMPOSSIBLE);

@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 12:03:29 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/01 14:30:31 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/05 19:00:46 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	generation(t_puzzle_data *data)
 {
 	char	*line;
-	int		n;
 
 	ft_putendl("Renseignez la taille du N-Puzzle (Max : x):");
 	get_next_line(STDIN_FILENO, &line);
@@ -23,11 +22,11 @@ void	generation(t_puzzle_data *data)
 	{
 		ft_memdel((void**)&line);
 		srand(time(NULL));
-		n = data->size * data->size;
+		data->area = data->size * data->size;
 		coor_alloc(data);
 		func_init(data);
 		mem_puzzle(data);
-		make_npuzzle(data, n);
+		make_npuzzle(data);
 	}
 	else
 	{
@@ -36,14 +35,17 @@ void	generation(t_puzzle_data *data)
 	}
 }
 
-void	make_npuzzle(t_puzzle_data *data, int n)
+void	make_npuzzle(t_puzzle_data *data)
 {
-	int i;
+	unsigned int i;
 
-	i = -1;
-	while (++i < n)
+	i = 0;
+	while (i < data->area)
+	{
 		data->puzzle[i] = i;
-	random_tab(data->puzzle, n);
+		i++;
+	}
+	random_tab(data->puzzle, data->area);
 	is_soluble(data, 1);
 }
 

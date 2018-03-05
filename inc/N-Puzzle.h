@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:03:58 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/02 20:13:13 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/05 19:39:21 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,9 @@
 # define H_UP_F heap->tab[i_up]->cost + heap->tab[i_up]->heu
 # define HASH state->hash
 # define ID state->id
-
-typedef struct		s_puzzle_data
-{
-	int		size;
-	int		line;
-	unsigned int*	puzzle;
-	unsigned int* state_coor;
-	unsigned int* goal_coor;
-	int		(*coor[4])(int d, int v, int im, int size);
-}					t_puzzle_data;
+# define HEU_CHOICE data->heu_choice
+# define SIZE data->size
+# define AREA data->area
 
 typedef struct		s_state
 {
@@ -69,6 +62,23 @@ typedef struct		s_state
 	struct s_state *right;
 }					t_state;
 
+typedef struct		s_puzzle_data
+{
+	unsigned int		size;
+	unsigned int		area;
+	unsigned int		line;
+	unsigned int		heu_choice;
+	int		search_cost;
+	unsigned int*	puzzle;
+	unsigned int* state_coor;
+	unsigned int* goal_coor;
+	unsigned int* goal_value;
+	int		(*coor[4])(int d, int v, int im, int size);
+	unsigned int		(*heu[3])(unsigned int *state, struct s_puzzle_data *data);
+	uint64_t (*move[4])(t_state *state, unsigned int size);
+}					t_puzzle_data;
+
+
 typedef struct		s_heap
 {
 	t_state		**tab;
@@ -79,7 +89,7 @@ typedef struct		s_heap
 void	get_file(char *file, t_puzzle_data *data);
 int		good_line(char *line);
 void	analyse_line(char *line, t_puzzle_data *data);
-int		mat_len_y(char **mat);
+unsigned int		mat_len_y(char **mat);
 void	mem_puzzle(t_puzzle_data *data);
 void	exit_bad_file(char **line, char **split, t_puzzle_data *data, int code);
 void	exit_bad_file2(t_puzzle_data *data);
@@ -108,7 +118,7 @@ unsigned int		*tab_copy(unsigned int *tab, int size);
 void generation(t_puzzle_data *data);
 int size_verif(char *s);
 int		is_num(char *s);
-void	make_npuzzle(t_puzzle_data *data, int n);
+void	make_npuzzle(t_puzzle_data *data);
 void print_coor(unsigned int *tab, int n);
 void	random_tab(unsigned int *tab, int n);
 void swap_tabint(unsigned int *tab, int a, int b);
@@ -128,7 +138,7 @@ void	add_node(t_state **root, t_state *state);
 t_state		*search_node(t_state *root, uint64_t id);
 t_state		**mem_hash_table(void);
 
-t_state		*mem_state_4(uint64_t id, t_state *pre, unsigned int size, unsigned int *goal);
+t_state		*mem_state_4(uint64_t id, t_state *pre, t_puzzle_data *data);
 void	puz_state(t_state *state, unsigned int size);
 uint64_t	id_state(unsigned int *tab, unsigned int size);
 unsigned int hash_table(uint64_t id);
@@ -138,7 +148,12 @@ uint64_t	up_tile(t_state *state, unsigned int size);
 uint64_t	down_tile(t_state *state, unsigned int size);
 
 void	pre_start_a(t_puzzle_data *data);
-void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab, unsigned int size, uint64_t (*move[4])(t_state *, unsigned int), unsigned int *goal_coor);
+void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab, t_puzzle_data *data);
 
-int		manhattan_dist(unsigned int *state, unsigned int *goal, unsigned int size);
+unsigned int		manhattan_dist(unsigned int *state, t_puzzle_data *data);
+unsigned int	hamming_dist(unsigned int *state, t_puzzle_data *data);
+unsigned int	linear_conflict(unsigned int *state, t_puzzle_data *data);
+void	search_choice(t_puzzle_data *data);
+void	heuristic_choice(t_puzzle_data *data);
+int		choice_verif(char *s);
 #endif

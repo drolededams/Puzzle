@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:43:42 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/02 15:53:22 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/05 19:11:02 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ void	func_init(t_puzzle_data *data)
 	data->coor[1] = coor_right;
 	data->coor[2] = coor_bottom;
 	data->coor[3] = coor_left;
+	data->heu[0] = linear_conflict;
+	data->heu[1] = manhattan_dist;
+	data->heu[2] = hamming_dist;
+	data->move[0] = up_tile;
+	data->move[1] = down_tile;
+	data->move[2] = left_tile;
+	data->move[3] = right_tile;
 }
 
 int		is_num(char *s)
@@ -40,9 +47,9 @@ int		is_num(char *s)
 	return (i);
 }
 
-int		mat_len_y(char **mat)
+unsigned int		mat_len_y(char **mat)
 {
-	int i;
+	unsigned  i;
 
 	i = 0;
 	while (mat[i] != NULL)

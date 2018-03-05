@@ -6,28 +6,12 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 11:40:13 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/02 20:38:00 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/05 17:07:04 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "N-Puzzle.h"
 
-int		manhattan_dist(unsigned int *state, unsigned int *goal, unsigned int size)
-{
-	unsigned int i;
-	int heu;
-	int sqrt;
-
-	i = 1;
-	heu = 0;
-	sqrt = ft_sqrt(size);
-	while(i < size)
-	{
-		heu += distance(state[i], goal[i], sqrt);
-		i++;
-	}
-	return (heu);
-}
 
 int		distance(int a, int b, int size)
 {
