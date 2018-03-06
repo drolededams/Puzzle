@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:03:58 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/06 10:59:17 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/06 19:03:52 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct		s_puzzle_data
 	int		(*coor[4])(int d, int v, int im, int size);
 	unsigned int		(*heu[3])(unsigned int *state, struct s_puzzle_data *data);
 	uint64_t (*move[4])(t_state *state, unsigned int size);
+	uint64_t (*move_n[4])(t_state *state, unsigned int *coor, unsigned int *val, unsigned int size);
 }					t_puzzle_data;
 
 
@@ -115,6 +116,7 @@ void	is_soluble(t_puzzle_data *data, int random);
 int		permutation_calc(t_puzzle_data *data);
 void	coor_alloc(t_puzzle_data *data);
 unsigned int		*tab_copy(unsigned int *tab, int size);
+void		state_tab_copy(t_state *state, unsigned int *coor, unsigned int *val, unsigned int area);
 void generation(t_puzzle_data *data);
 int size_verif(char *s);
 int		is_num(char *s);
@@ -138,7 +140,7 @@ void	add_node(t_state **root, t_state *state);
 t_state		*search_node(t_state *root, uint64_t id);
 t_state		**mem_hash_table(void);
 
-t_state		*mem_state_4(uint64_t id, t_state *pre, t_puzzle_data *data);
+t_state		*mem_state(uint64_t id, t_state *pre, t_puzzle_data *data);
 void	puz_state(t_state *state, unsigned int area);
 uint64_t	id_state(unsigned int *tab, unsigned int area);
 unsigned int hash_table(uint64_t id, unsigned int area);
@@ -156,4 +158,21 @@ unsigned int	linear_conflict(unsigned int *state, t_puzzle_data *data);
 void	search_choice(t_puzzle_data *data);
 void	heuristic_choice(t_puzzle_data *data);
 int		choice_verif(char *s);
+
+void	pre_start_a_n(t_puzzle_data *data);
+void	start_a_n(t_heap *heap, uint64_t id_goal, t_state **hash_tab, t_puzzle_data *data);
+
+t_state		*mem_state_n(uint64_t id, unsigned int *coor, t_state *pre, t_puzzle_data *data);
+void	puz_state_n(t_state *state, unsigned int *coor, unsigned int area);
+uint64_t	id_state_n(unsigned int *tab, unsigned int area);
+unsigned int hash_table_n(unsigned int *coor, unsigned int *val,  unsigned int area);
+uint64_t	down_tile_n(t_state *state, unsigned int *coor, unsigned int *val,  unsigned int size);
+uint64_t	up_tile_n(t_state *state, unsigned int *coor, unsigned int *val, unsigned int size);
+uint64_t	right_tile_n(t_state *state, unsigned int *coor, unsigned int *val, unsigned int size);
+uint64_t	left_tile_n(t_state *state, unsigned int *coor, unsigned int *val, unsigned int size);
+
+t_state		*search_node_n(t_state *root, uint64_t id, unsigned int *coor, unsigned int area);
+t_state		**mem_hash_table_n(void);
+int		same_state(unsigned int *pre, unsigned int *suc, unsigned int area);
+unsigned int	*puz_alloc(unsigned int area);
 #endif

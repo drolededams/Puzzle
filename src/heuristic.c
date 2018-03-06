@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 15:06:10 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/05 19:11:34 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/06 11:43:38 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,16 @@ void	search_choice(t_puzzle_data *data)
 	get_next_line(STDIN_FILENO, &line);
 	if((choice = choice_verif(line)))
 	{
+		data->search_cost = 1;
 		if (choice == 1)
-		{
-			data->search_cost = 1;
 			heuristic_choice(data);
-		}
 		else if (choice == 2)
 		{
 			data->search_cost = 0;
 			heuristic_choice(data);
 		}
 		else
-		{
-			data->search_cost = 1;
 			data->heu_choice = 0;
-		}
 	}
 	else
 	{

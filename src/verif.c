@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:29:23 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/05 19:00:17 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/06 19:31:49 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	verif_puzzle(t_puzzle_data *data)
 	ft_putendl("Good numbers");
 	good_numbers(data);
 	ft_putendl("Is Soluble");
+	coor_alloc(data);
+	func_init(data);
 	is_soluble(data, 0);
 	ft_putendl("fin");
 }
@@ -56,8 +58,6 @@ void	is_soluble(t_puzzle_data *data, int random)
 	int final_coor;
 
 	i = 0;
-	coor_alloc(data);
-	func_init(data);
 	while (i < data->area)
 	{
 		data->state_coor[data->puzzle[i]] = i;
@@ -76,7 +76,10 @@ void	is_soluble(t_puzzle_data *data, int random)
 	{
 		ft_putendl("Puzzle Soluble");
 		search_choice(data);
-		pre_start_a(data);
+		//if (data->size < 5)
+		//	pre_start_a(data);
+		//else
+			pre_start_a_n(data);
 	}
 	else if (random)
 	{

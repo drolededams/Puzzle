@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:57:48 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/05 17:08:37 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/06 18:48:03 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,13 @@ void	coor_alloc(t_puzzle_data *data)
 		exit_alloc_failed();
 	if (!(data->goal_value = (unsigned int*)malloc(sizeof(unsigned int) * data->area)))
 		exit_alloc_failed();
+}
+
+unsigned int	*puz_alloc(unsigned int area)
+{
+	unsigned int *tab;
+
+	if (!(tab = (unsigned int*)malloc(sizeof(unsigned int) * area)))
+		exit_alloc_failed();
+	return (tab);
 }

@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:30:22 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/06 10:57:55 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/06 19:10:37 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	pre_start_a(t_puzzle_data *data)
 	uint64_t id_goal;
 
 	hash_tab = mem_hash_table();
-	start = mem_state_4(id_state(data->state_coor, data->area), NULL, data);
+	start = mem_state(id_state(data->state_coor, data->area), NULL, data);
 	start->cost = 0;
 	printf("%" PRIu64 "\n", start->id);
 	id_goal = id_state(data->goal_coor, data->area);
@@ -64,7 +64,7 @@ void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab, t_puzzle_data *
 					if (!(successor = search_node(hash_tab[hash_table(id_successor, data->area)], id_successor)))
 					{
 						count_2++;
-						successor = mem_state_4(id_successor, state, data);
+						successor = mem_state(id_successor, state, data);
 						successor->cost = state->cost + data->search_cost;
 						push_heap(heap, successor);
 						add_node(&hash_tab[hash_table(successor->id, data->area)], successor);
@@ -83,12 +83,12 @@ void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab, t_puzzle_data *
 		}
 	}
 	int tour;
-	tour = 0;
+	tour = -1;
 	ft_putendl("Display result");
 	while(state != NULL)
 	{
 		tour++;
-		print_coor(state->value, data->area);
+		print_coor(state->coor, data->area);
 		printf("%" PRIu64 "\n", state->id);
 		printf("heuristique = %u \n", state->heu);
 		printf("cout = %u \n", state->cost);

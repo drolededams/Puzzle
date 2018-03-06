@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 10:49:05 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/05 20:47:55 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/06 19:17:47 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		main(int ac, char **av)
 		generation(data);
 	else
 	{
-		ft_memdel((void**)data);
+		ft_memdel((void**)&data);
 		ft_putstr("usage: ./N-Puzzle file (max one file)\n");
 	}
 	return (1);

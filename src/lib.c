@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:43:42 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/05 19:11:02 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/06 18:57:56 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ void	func_init(t_puzzle_data *data)
 	data->move[1] = down_tile;
 	data->move[2] = left_tile;
 	data->move[3] = right_tile;
+	data->move_n[0] = up_tile_n;
+	data->move_n[1] = down_tile_n;
+	data->move_n[2] = left_tile_n;
+	data->move_n[3] = right_tile_n;
 }
 
 int		is_num(char *s)
@@ -68,4 +72,17 @@ unsigned int		*tab_copy(unsigned int *tab, int size)
 	while (++i < size)
 		copy[i] = tab[i];
 	return (copy);
+}
+
+void		state_tab_copy(t_state *state, unsigned int *coor, unsigned int *val, unsigned int area)
+{
+	unsigned int i;
+
+	i = 0;
+	while (i < area)
+	{
+		coor[i] = state->coor[i];
+		val[i] = state->value[i];
+		i++;
+	}
 }
