@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:30:22 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/05 19:38:55 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/06 10:57:55 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	pre_start_a(t_puzzle_data *data)
 	printf("%" PRIu64 "\n", id_goal);
 	heap = mem_heap();
 	push_heap(heap, start);
-	add_node(&hash_tab[hash_table(start->id)], start);
+	add_node(&hash_tab[hash_table(start->id, data->area)], start);
 	start_a(heap, id_goal, hash_tab, data);
 	//lib mem data
 }
@@ -61,13 +61,13 @@ void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab, t_puzzle_data *
 			{
 				if ((id_successor = data->move[i](state, data->size)))
 				{
-					if (!(successor = search_node(hash_tab[hash_table(id_successor)], id_successor)))
+					if (!(successor = search_node(hash_tab[hash_table(id_successor, data->area)], id_successor)))
 					{
 						count_2++;
 						successor = mem_state_4(id_successor, state, data);
 						successor->cost = state->cost + data->search_cost;
 						push_heap(heap, successor);
-						add_node(&hash_tab[hash_table(successor->id)], successor);
+						add_node(&hash_tab[hash_table(successor->id, data->area)], successor);
 					}
 					else if (successor->cost > state->cost + data->search_cost)
 					{
@@ -92,13 +92,13 @@ void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab, t_puzzle_data *
 		printf("%" PRIu64 "\n", state->id);
 		printf("heuristique = %u \n", state->heu);
 		printf("cout = %u \n", state->cost);
-		printf("hash = %u \n", hash_table(state->id));
+		printf("hash = %u \n", hash_table(state->id, data->area));
 		ft_putendl("pre");
 		state = state->pre;
 	}
-	printf("etape = %d \n", tour);
-	printf("state visited = %d \n", count);
-	printf("cout memoire = %d \n", count_2);
+	printf("Complexity in Time (states selected) = %d \n", count);
+	printf("Complexity in Size  (States in memory) = %d \n", count_2);
+	printf("Number of Moves = %d \n", tour);
 	printf("Max HSIZE = %d \n", max_hsize);
 	printf("final HSIZE = %d \n", H_SIZE);
 }

@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:03:58 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/05 19:39:21 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/06 10:59:17 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,9 @@ t_state		*search_node(t_state *root, uint64_t id);
 t_state		**mem_hash_table(void);
 
 t_state		*mem_state_4(uint64_t id, t_state *pre, t_puzzle_data *data);
-void	puz_state(t_state *state, unsigned int size);
-uint64_t	id_state(unsigned int *tab, unsigned int size);
-unsigned int hash_table(uint64_t id);
+void	puz_state(t_state *state, unsigned int area);
+uint64_t	id_state(unsigned int *tab, unsigned int area);
+unsigned int hash_table(uint64_t id, unsigned int area);
 uint64_t	left_tile(t_state *state, unsigned int size);
 uint64_t	right_tile(t_state *state, unsigned int size);
 uint64_t	up_tile(t_state *state, unsigned int size);

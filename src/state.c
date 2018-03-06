@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 19:12:45 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/05 18:59:27 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/06 10:59:36 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ t_state		*mem_state_4(uint64_t id, t_state *pre, t_puzzle_data *data)
 	return (state);
 }
 
-void	puz_state(t_state *state, unsigned int size)
+void	puz_state(t_state *state, unsigned int area)
 {
 	unsigned int i; 
 
 	i = 0;
-	while(i < size)
+	while(i < area)
 	{
 		state->coor[i] = (state->id >> 4 * i) & 0xF;
 		state->value[state->coor[i]] = i;
@@ -47,14 +47,14 @@ void	puz_state(t_state *state, unsigned int size)
 	}
 }
 
-uint64_t	id_state(unsigned int *tab, unsigned int size)
+uint64_t	id_state(unsigned int *tab, unsigned int area)
 {
 	uint64_t i;
 	uint64_t id;
 
 	i = 0;
 	id = 0;
-	while(i < size)
+	while(i < area)
 	{
 		id |= i << (tab[i] * 4);
 		i++;
@@ -62,19 +62,37 @@ uint64_t	id_state(unsigned int *tab, unsigned int size)
 	return (id);
 }
 
-unsigned int hash_table(uint64_t id)
+unsigned int hash_table(uint64_t id, unsigned int area)
 {
 	unsigned int x;
 	unsigned int i;
+	unsigned int hash;
 
 	x = 1;
 	i = 0;
+	hash = 0;
 	while(x != 0)
 	{
 		x = (id >> 4 * i) & 0xF;
 		i++;
 	}
-	return ((id & 1023));
+	if (i == 1)
+	{
+		hash = (id >> 4) & 0xF;
+		hash = hash << 8;
+	}
+	else if (i == area)
+	{
+		hash =  i - 1;
+		hash = (hash << 4) | ((id >> 4 * (i - 2)) & 0xF);
+	}
+	else
+	{
+		hash = (id >> (4 * i)) & 0xF;
+		hash = (hash << 4) | i;
+		hash = (hash << 4) | (id >> 4 * (i - 2) & 0xF);
+	}
+	return (hash & 1023);
 }
 
 uint64_t	down_tile(t_state *state, unsigned int size)
