@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:30:22 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/06 19:10:37 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/08 15:45:41 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ void	pre_start_a(t_puzzle_data *data)
 	hash_tab = mem_hash_table();
 	start = mem_state(id_state(data->state_coor, data->area), NULL, data);
 	start->cost = 0;
-	printf("%" PRIu64 "\n", start->id);
 	id_goal = id_state(data->goal_coor, data->area);
-	printf("%" PRIu64 "\n", id_goal);
 	heap = mem_heap();
 	push_heap(heap, start);
 	add_node(&hash_tab[hash_table(start->id, data->area)], start);
@@ -34,30 +32,27 @@ void	pre_start_a(t_puzzle_data *data)
 
 void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab, t_puzzle_data *data)
 {
-	int success;
-	int i;
-	int count;
-	int count_2;
-	uint64_t id_successor;
-	int max_hsize;
-	t_state *state;
-	t_state *successor;
+	int			success;
+	int			i;
+	int			count;
+	int			count_2;
+	uint64_t	id_successor;
+	t_state		*state;
+	t_state		*successor;
+
 	success = 0;
 	count = 0;
 	count_2 = 1;
-	max_hsize = H_SIZE;
 	while (H_SIZE > 0 && !success)
 	{
 		count++;
-		if(H_SIZE > max_hsize)
-			max_hsize = H_SIZE;
-		state = pop_heap(heap); 
+		state = pop_heap(heap);
 		if (state->id == id_goal)
 			success = 1;
 		else
 		{
 			i = -1;
-			while(++i < 4)
+			while (++i < 4)
 			{
 				if ((id_successor = data->move[i](state, data->size)))
 				{
@@ -72,8 +67,8 @@ void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab, t_puzzle_data *
 					else if (successor->cost > state->cost + data->search_cost)
 					{
 						successor->pre = state;
-						successor->cost = state->cost + 1;
-						if(!successor->i_heap)
+						successor->cost = state->cost + data->search_cost;
+						if (!successor->i_heap)
 							push_heap(heap, successor);
 						else
 							up_heap(heap, successor->i_heap);
@@ -82,23 +77,7 @@ void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab, t_puzzle_data *
 			}
 		}
 	}
-	int tour;
-	tour = -1;
-	ft_putendl("Display result");
-	while(state != NULL)
-	{
-		tour++;
-		print_coor(state->coor, data->area);
-		printf("%" PRIu64 "\n", state->id);
-		printf("heuristique = %u \n", state->heu);
-		printf("cout = %u \n", state->cost);
-		printf("hash = %u \n", hash_table(state->id, data->area));
-		ft_putendl("pre");
-		state = state->pre;
-	}
 	printf("Complexity in Time (states selected) = %d \n", count);
 	printf("Complexity in Size  (States in memory) = %d \n", count_2);
-	printf("Number of Moves = %d \n", tour);
-	printf("Max HSIZE = %d \n", max_hsize);
-	printf("final HSIZE = %d \n", H_SIZE);
+	file_print(state, data);
 }

@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:29:23 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/06 19:31:49 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/07 18:41:40 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 void	verif_puzzle(t_puzzle_data *data)
 {
-	ft_putendl("Good numbers");
 	good_numbers(data);
-	ft_putendl("Is Soluble");
 	coor_alloc(data);
 	func_init(data);
 	is_soluble(data, 0);
-	ft_putendl("fin");
 }
 
 void	good_numbers(t_puzzle_data *data)
@@ -52,10 +49,10 @@ int		is_in_puzzle(t_puzzle_data *data, unsigned int n)
 
 void	is_soluble(t_puzzle_data *data, int random)
 {
-	unsigned int i;
-	int blank_dis;
-	int permutation;
-	int final_coor;
+	unsigned int	i;
+	int				blank_dis;
+	int				permutation;
+	int				final_coor;
 
 	i = 0;
 	while (i < data->area)
@@ -68,24 +65,20 @@ void	is_soluble(t_puzzle_data *data, int random)
 	}
 	blank_dis = distance(data->state_coor[0], data->goal_coor[0], data->size) % 2;
 	permutation = permutation_calc(data) % 2;
-	ft_putendl("gen");
-	print_coor(data->state_coor, data->area);
-	ft_putendl("sol");
-	print_coor(data->goal_coor, data->area);
 	if (blank_dis == permutation)
 	{
-		ft_putendl("Puzzle Soluble");
+		ft_putendl("Start:");
+		print_coor(data->state_coor, data->area);
+		ft_putendl("Goal:");
+		print_coor(data->goal_coor, data->area);
 		search_choice(data);
-		//if (data->size < 5)
-		//	pre_start_a(data);
-		//else
+		if (data->size < 5)
+			pre_start_a(data);
+		else
 			pre_start_a_n(data);
 	}
 	else if (random)
-	{
-		ft_putendl("Puzzle Non Soluble. Generation d'un nouveau");
 		make_npuzzle(data);
-	}
 	else
 		exit_bad_puzzle(data, IMPOSSIBLE);
 }

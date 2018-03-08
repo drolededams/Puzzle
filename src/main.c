@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 10:49:05 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/06 19:17:47 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/07 16:40:35 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int		main(int ac, char **av)
 	if (ac == 2)
 	{
 		get_file(av[1], data);
-		print_puzzle(data->puzzle, data->area);
 		verif_puzzle(data);
 	}
 	else if (ac == 1)

@@ -6,12 +6,11 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 11:40:13 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/05 17:07:04 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/07 18:09:30 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "N-Puzzle.h"
-
 
 int		distance(int a, int b, int size)
 {
@@ -86,11 +85,11 @@ int		find_final_coor(t_puzzle_data *data, int value)
 
 int		permutation_calc(t_puzzle_data *data)
 {
-	int i;
-	int j;
-	int size;
-	int perm;
-	unsigned int *copy;
+	int				i;
+	int				j;
+	int				size;
+	int				perm;
+	unsigned int	*copy;
 
 	i = 0;
 	j = 1;
@@ -111,5 +110,6 @@ int		permutation_calc(t_puzzle_data *data)
 			j = i + 1;
 		}
 	}
+	ft_memdel((void**)&copy);
 	return (perm);
 }

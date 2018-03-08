@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:37:40 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/02/26 18:00:48 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/07 18:08:33 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,20 @@ void	free_tab(char **tab)
 
 	i = 0;
 	while (tab[i])
+	{
+		ft_memdel((void**)&tab[i]);
+		i++;
+	}
+	ft_memdel((void**)&tab[i]);
+	ft_memdel((void**)tab);
+}
+
+void	free_tab_int(int **tab, int area)
+{
+	int i;
+
+	i = 0;
+	while (i < area)
 	{
 		ft_memdel((void**)&tab[i]);
 		i++;

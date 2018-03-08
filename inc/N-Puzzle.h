@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:03:58 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/06 19:03:52 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/08 11:49:24 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	exit_bad_line(char **line, t_puzzle_data *data, int code);
 void	exit_alloc_failed(void);
 char	**strcomsplit(const char *s, char c);
 void	free_tab(char **tab);
+void	free_tab_int(int **tab, int area);
 void	verif_puzzle(t_puzzle_data *data);
 void	good_numbers(t_puzzle_data *data);
 int		is_in_puzzle(t_puzzle_data *data, unsigned int n);
@@ -121,12 +122,18 @@ void generation(t_puzzle_data *data);
 int size_verif(char *s);
 int		is_num(char *s);
 void	make_npuzzle(t_puzzle_data *data);
-void print_coor(unsigned int *tab, int n);
 void	random_tab(unsigned int *tab, int n);
 void swap_tabint(unsigned int *tab, int a, int b);
+int		decimal_number(int n);
+
+void print_coor(unsigned int *tab, int n);
 void	print_puzzle(unsigned int *tab, int n);
 void	print_tabint(unsigned int *tab, int n);
 void		print_bits(uint64_t n);
+void	fprint_puzzle(FILE *fichier, unsigned int *tab, int n);
+void	fprint_coor(FILE* fichier, unsigned int *tab, int n);
+void	file_print(t_state *state, t_puzzle_data *data);
+char	*file_name(t_puzzle_data *data);
 
 t_heap		*mem_heap(void);
 void	realloc_heap(t_heap *heap);
@@ -148,6 +155,8 @@ uint64_t	left_tile(t_state *state, unsigned int size);
 uint64_t	right_tile(t_state *state, unsigned int size);
 uint64_t	up_tile(t_state *state, unsigned int size);
 uint64_t	down_tile(t_state *state, unsigned int size);
+unsigned int			**state_sort(t_state *state, int n);
+int			move_count(t_state *state);
 
 void	pre_start_a(t_puzzle_data *data);
 void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab, t_puzzle_data *data);
@@ -175,4 +184,6 @@ t_state		*search_node_n(t_state *root, uint64_t id, unsigned int *coor, unsigned
 t_state		**mem_hash_table_n(void);
 int		same_state(unsigned int *pre, unsigned int *suc, unsigned int area);
 unsigned int	*puz_alloc(unsigned int area);
+uint64_t *pb_tab(void);
+int		is_ontab(uint64_t *tab, uint64_t n);
 #endif

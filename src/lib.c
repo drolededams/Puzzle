@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:43:42 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/06 18:57:56 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/07 19:37:53 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		is_num(char *s)
 
 unsigned int		mat_len_y(char **mat)
 {
-	unsigned  i;
+	unsigned i;
 
 	i = 0;
 	while (mat[i] != NULL)
@@ -63,8 +63,8 @@ unsigned int		mat_len_y(char **mat)
 
 unsigned int		*tab_copy(unsigned int *tab, int size)
 {
-	unsigned int *copy;
-	int i;
+	unsigned int	*copy;
+	int				i;
 
 	if (!(copy = (unsigned int*)malloc(sizeof(unsigned int) * size)))
 		exit_alloc_failed();//mem a lib

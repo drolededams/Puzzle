@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 15:06:10 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/06 11:43:38 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/07 18:01:07 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ unsigned int	hamming_dist(unsigned int *state, t_puzzle_data *data)
 
 	i = 1;
 	heu = 0;
-	while(i < data->area)
+	while (i < data->area)
 	{
 		if (data->goal_coor[i] != state[i])
 			heu++;
@@ -71,17 +71,17 @@ unsigned int	linear_conflict(unsigned int *state, t_puzzle_data *data)
 	return (heu);
 }
 
-void	search_choice(t_puzzle_data *data)
+void			search_choice(t_puzzle_data *data)
 {
 	char	*line;
-	int		 choice;
+	int		choice;
 
 	ft_putendl("Type a number to choose a Search Algorithme:");
 	ft_putendl("1: A*");
 	ft_putendl("2: Greedy Search");
 	ft_putendl("3: Uniform Cost");
 	get_next_line(STDIN_FILENO, &line);
-	if((choice = choice_verif(line)))
+	if ((choice = choice_verif(line)))
 	{
 		data->search_cost = 1;
 		if (choice == 1)
@@ -101,7 +101,7 @@ void	search_choice(t_puzzle_data *data)
 	}
 }
 
-void	heuristic_choice(t_puzzle_data *data)
+void			heuristic_choice(t_puzzle_data *data)
 {
 	char	*line;
 
@@ -117,7 +117,7 @@ void	heuristic_choice(t_puzzle_data *data)
 	}
 }
 
-int		choice_verif(char *s)
+int				choice_verif(char *s)
 {
 	if (!is_num(s))
 	{

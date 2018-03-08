@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:52:04 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/06 19:46:20 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/07 13:03:00 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ uint64_t	id_state_n(unsigned int *tab, unsigned int area)
 {
 	uint64_t id;
 
-	id = 941 * (tab[0] + 1) * (tab[1] + 1) * (tab[16] + 1) * (tab[area -1] + 1);
+	id = 941 * (tab[0] + 1) + 919 * tab[14] * (tab[0] + 1) + 863 * (tab[0] + 1) * tab[area - 1];
 	return (id);
 }
 
@@ -75,8 +75,7 @@ unsigned int hash_table_n(unsigned int *coor, unsigned int *val,  unsigned int a
 		hash = (hash << 8) | ze;
 		hash = (hash << 8) | val[ze + 1];
 	}
-
-	return ((97 * hash) & 65535);
+	return ((97 * hash) & 16777215);
 }
 
 uint64_t	down_tile_n(t_state *state, unsigned int *coor, unsigned int *val,  unsigned int size)
