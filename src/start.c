@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:30:22 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/08 15:45:41 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/08 16:46:21 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab, t_puzzle_data *
 	}
 	printf("Complexity in Time (states selected) = %d \n", count);
 	printf("Complexity in Size  (States in memory) = %d \n", count_2);
+	printf("h size = %d\n", H_SIZE);
 	file_print(state, data);
 }

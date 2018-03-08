@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 15:06:10 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/07 18:01:07 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/08 17:47:29 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,18 @@ unsigned int	linear_conflict(unsigned int *state, t_puzzle_data *data)
 	i = 1;
 	while (i < data->area)
 	{
-		j = i + 1;
+		j = 1;
 		line = state[i] / SIZE;
 		col = state[i] % SIZE;
 		while (j < data->area)
 		{
-			if (line == state[j] / SIZE && line == data->goal_coor[i] / SIZE && line == data->goal_coor[j] / SIZE && state[i] > state[j] && data->goal_coor[i] < data->goal_coor[j])
-				heu += 2;
-			else if (col == state[j] % SIZE && col == data->goal_coor[i] % SIZE && col == data->goal_coor[j] % SIZE && state[i] > state[j] && data->goal_coor[i] < data->goal_coor[j])
-				heu += 2;
+			if (i != j)
+			{
+				if (line == (state[j] / SIZE) && line == (data->goal_coor[i] / SIZE) && line == (data->goal_coor[j] / SIZE) && state[i] > state[j] && data->goal_coor[i] < data->goal_coor[j])
+					heu += 2;
+				else if (col == (state[j] % SIZE) && col == (data->goal_coor[i] % SIZE) && col == (data->goal_coor[j] % SIZE) && state[i] > state[j] && data->goal_coor[i] < data->goal_coor[j])
+					heu += 2;
+			}
 			j++;
 		}
 		i++;

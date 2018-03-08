@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 14:33:34 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/08 15:40:42 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/08 17:02:20 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_heap		*mem_heap(void)
 
 	if (!(heap = (t_heap*)malloc(sizeof(t_heap))))
 		exit_alloc_failed();
-	H_MAX = 10000;
+	H_MAX = 500000;
 	if (!(heap->tab = (t_state**)malloc(sizeof(t_state*) * H_MAX)))
 		exit_alloc_failed();
 	H_SIZE = 0;
