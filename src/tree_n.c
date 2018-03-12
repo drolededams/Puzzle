@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:03:06 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/09 16:49:44 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/03/12 16:42:06 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_state		**mem_hash_table_n(void)
 {
 	t_state **hash;
 
-	if (!(hash = (t_state**)calloc(sizeof(t_state*),  16777216)))
+	if (!(hash = (t_state**)calloc(16777216, sizeof(t_state*))))
 		exit_alloc_failed();
 	return (hash);
 }// a free
