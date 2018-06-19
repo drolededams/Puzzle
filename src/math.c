@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 11:40:13 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/07 18:09:30 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/06/19 18:43:55 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int		distance(int a, int b, int size)
 {
-	return (ft_sqrt(ft_power((a / size) - (b / size), 2)) + ft_sqrt(ft_power((a % size) - (b % size), 2)));
+	return (ft_sqrt(ft_power((a / size) - (b / size), 2)) +
+		ft_sqrt(ft_power((a % size) - (b % size), 2)));
 }
 
 int		coor_top(int d, int v, int im, int size)

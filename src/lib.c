@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:43:42 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/07 19:37:53 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/06/19 18:43:16 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ unsigned int		*tab_copy(unsigned int *tab, int size)
 	return (copy);
 }
 
-void		state_tab_copy(t_state *state, unsigned int *coor, unsigned int *val, unsigned int area)
+void		state_tab_copy(t_state *state, unsigned int *coor,
+	unsigned int *val, unsigned int area)
 {
 	unsigned int i;
 

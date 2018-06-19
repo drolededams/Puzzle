@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 15:06:10 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/08 17:47:29 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/06/19 19:43:56 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ void			search_choice(t_puzzle_data *data)
 {
 	char	*line;
 	int		choice;
+	int		rep;
 
 	ft_putendl("Type a number to choose a Search Algorithme:");
 	ft_putendl("1: A*");
 	ft_putendl("2: Greedy Search");
 	ft_putendl("3: Uniform Cost");
-	get_next_line(STDIN_FILENO, &line);
-	if ((choice = choice_verif(line)))
+	if ((rep = get_next_line(STDIN_FILENO, &line)) > 0 && (choice = choice_verif(line)))
 	{
 		data->search_cost = 1;
 		if (choice == 1)
@@ -99,7 +99,8 @@ void			search_choice(t_puzzle_data *data)
 	}
 	else
 	{
-		ft_memdel((void**)&line);
+		if (rep > 0)
+			ft_memdel((void**)&line);
 		search_choice(data);
 	}
 }
@@ -107,15 +108,20 @@ void			search_choice(t_puzzle_data *data)
 void			heuristic_choice(t_puzzle_data *data)
 {
 	char	*line;
+	int		rep;
 
 	ft_putendl("Type a number to choose a heuristic:");
 	ft_putendl("1: Linear Conflict");
 	ft_putendl("2: Manhattan Distance");
 	ft_putendl("3: Hamming Distance");
-	get_next_line(STDIN_FILENO, &line);
-	if (!(HEU_CHOICE = choice_verif(line)))
+	if ((rep = get_next_line(STDIN_FILENO, &line)) > 0 && (HEU_CHOICE = choice_verif(line)))
 	{
 		ft_memdel((void**)&line);
+	}
+	else
+	{
+		if (rep > 0)
+			ft_memdel((void**)&line);
 		heuristic_choice(data);
 	}
 }

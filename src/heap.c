@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 14:33:34 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/09 17:29:35 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/06/19 18:40:53 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_state		*pop_heap(t_heap *heap)
 		return (NULL);
 	best = heap->tab[1];
 	best->i_heap = 0;
-	if(H_SIZE != 1)
+	if (H_SIZE != 1)
 	{
 		heap->tab[1] = H_LAST;
 		heap->tab[1]->i_heap = 1;

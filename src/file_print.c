@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 17:06:27 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/08 15:49:13 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/06/19 18:40:14 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,16 +116,6 @@ void			file_print(t_state *state, t_puzzle_data *data)
 		}
 		print_coor(print[i], data->area);
 	}
-	/*while(state != NULL)
-	{
-		//fprint_coor(file, state->coor, data->area);
-		//fprintf(file, "\n");
-		fprintf(file, "%" PRId64 "\n", state->id);
-		//fprintf(file, "heu = %d\n", state->heu);
-		//fprintf(file, "cost = %d\n", state->cost);
-		//fprintf(file, "\n\n");
-		state = state->pre;
-	}*/
 	printf("Number of Moves = %d \n", move);
 	ft_memdel((void**)&name);
 }

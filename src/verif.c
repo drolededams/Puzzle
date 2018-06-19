@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:29:23 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/08 16:34:47 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/06/19 19:08:36 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void	is_soluble(t_puzzle_data *data, int random)
 		data->goal_value[final_coor] = data->puzzle[i];
 		i++;
 	}
-	blank_dis = distance(data->state_coor[0], data->goal_coor[0], data->size) % 2;
+	blank_dis = distance(data->state_coor[0], data->goal_coor[0],
+		data->size) % 2;
 	permutation = permutation_calc(data) % 2;
 	if (blank_dis == permutation)
 	{
