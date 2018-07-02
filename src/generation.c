@@ -17,7 +17,7 @@ void	generation(t_puzzle_data *data)
 	char	*line;
 	int		rep;
 
-	ft_putendl("Renseignez la taille du N-Puzzle (Max : x):");
+	ft_putendl("Renseignez la taille du N-Puzzle (Min: 2 | Max : x):");
 	if ((rep = get_next_line(STDIN_FILENO, &line)) > 0 && (data->size = size_verif(line)))
 	{
 		ft_memdel((void**)&line);
@@ -63,7 +63,7 @@ int		size_verif(char *s)
 {
 	if (!is_num(s))
 	{
-		ft_putendl("Caractères numériques seulement. Max : x");
+		ft_putendl("Caractères numériques seulement. Min : 2 | Max : x");
 		return (0);
 	}
 	if (ft_strlen(s) > 2)

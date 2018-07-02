@@ -117,6 +117,7 @@ void			file_print(t_state *state, t_puzzle_data *data)
 		print_coor(print[i], data->area);
 	}
 	printf("Number of Moves = %d \n", move);
+	printf("The sequence is saved in file : %s\n", name);
 	ft_memdel((void**)&name);
 }
 
