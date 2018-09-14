@@ -6,13 +6,13 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:43:42 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/06/19 18:43:16 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/14 16:32:03 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "N-Puzzle.h"
 
-void	swap_tabint(unsigned int *tab, int a, int b)
+void				swap_tabint(unsigned int *tab, int a, int b)
 {
 	unsigned int tmp;
 
@@ -21,7 +21,7 @@ void	swap_tabint(unsigned int *tab, int a, int b)
 	tab[b] = tmp;
 }
 
-void	func_init(t_puzzle_data *data)
+void				func_init(t_puzzle_data *data)
 {
 	data->coor[0] = coor_top;
 	data->coor[1] = coor_right;
@@ -40,7 +40,7 @@ void	func_init(t_puzzle_data *data)
 	data->move_n[3] = right_tile_n;
 }
 
-int		is_num(char *s)
+int					is_num(char *s)
 {
 	int i;
 
@@ -74,7 +74,7 @@ unsigned int		*tab_copy(unsigned int *tab, int size)
 	return (copy);
 }
 
-void		state_tab_copy(t_state *state, unsigned int *coor,
+void				state_tab_copy(t_state *state, unsigned int *coor,
 	unsigned int *val, unsigned int area)
 {
 	unsigned int i;

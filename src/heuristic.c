@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 15:06:10 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/06/19 19:43:56 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/14 16:30:33 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,15 @@ unsigned int	linear_conflict(unsigned int *state, t_puzzle_data *data)
 		{
 			if (i != j)
 			{
-				if (line == (state[j] / SIZE) && line == (data->goal_coor[i] / SIZE) && line == (data->goal_coor[j] / SIZE) && state[i] > state[j] && data->goal_coor[i] < data->goal_coor[j])
+				if (line == (state[j] / SIZE) && line == (data->goal_coor[i]
+							/ SIZE) && line == (data->goal_coor[j] / SIZE) &&
+						state[i] > state[j] && data->goal_coor[i]
+						< data->goal_coor[j])
 					heu += 2;
-				else if (col == (state[j] % SIZE) && col == (data->goal_coor[i] % SIZE) && col == (data->goal_coor[j] % SIZE) && state[i] > state[j] && data->goal_coor[i] < data->goal_coor[j])
+				else if (col == (state[j] % SIZE) && col == (data->goal_coor[i]
+							% SIZE) && col == (data->goal_coor[j] % SIZE) &&
+						state[i] > state[j] && data->goal_coor[i] <
+						data->goal_coor[j])
 					heu += 2;
 			}
 			j++;
@@ -84,7 +90,8 @@ void			search_choice(t_puzzle_data *data)
 	ft_putendl("1: A*");
 	ft_putendl("2: Greedy Search");
 	ft_putendl("3: Uniform Cost");
-	if ((rep = get_next_line(STDIN_FILENO, &line)) > 0 && (choice = choice_verif(line)))
+	if ((rep = get_next_line(STDIN_FILENO, &line)) > 0 &&
+			(choice = choice_verif(line)))
 	{
 		data->search_cost = 1;
 		if (choice == 1)
@@ -114,7 +121,8 @@ void			heuristic_choice(t_puzzle_data *data)
 	ft_putendl("1: Linear Conflict");
 	ft_putendl("2: Manhattan Distance");
 	ft_putendl("3: Hamming Distance");
-	if ((rep = get_next_line(STDIN_FILENO, &line)) > 0 && (HEU_CHOICE = choice_verif(line)))
+	if ((rep = get_next_line(STDIN_FILENO, &line)) > 0 &&
+			(HEU_CHOICE = choice_verif(line)))
 	{
 		ft_memdel((void**)&line);
 	}

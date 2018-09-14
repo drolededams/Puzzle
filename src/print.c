@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:47:13 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/07 18:13:03 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/14 16:35:12 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	print_coor(unsigned int *tab, int n)
 
 void	fprint_coor(FILE *fichier, unsigned int *tab, int n)
 {
-	unsigned int *puz;
-	int i;
+	unsigned int	*puz;
+	int				i;
 
 	if (!(puz = (unsigned int*)malloc(sizeof(unsigned int) * n)))
 		exit_alloc_failed(); //liberation memoire a faire

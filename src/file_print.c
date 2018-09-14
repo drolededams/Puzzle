@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 17:06:27 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/06/19 18:40:14 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/14 16:26:05 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,28 +120,28 @@ void			file_print(t_state *state, t_puzzle_data *data)
 	ft_memdel((void**)&name);
 }
 
-uint64_t *pb_tab(void)
+uint64_t	*pb_tab(void)
 {
-	uint64_t *tab;
-	uint64_t n;
-	unsigned int i;
-	unsigned int j;
-	char *line;
-	int fd;
+	uint64_t		*tab;
+	uint64_t		n;
+	unsigned int	i;
+	unsigned int	j;
+	char			*line;
+	int				fd;
 
 	if (!(tab = (uint64_t*)malloc(sizeof(uint64_t) * 116)))
 		exit_alloc_failed();
 	i = 0;
 	j = 0;
-	if((fd = open("table", O_RDONLY)) != -1)
+	if ((fd = open("table", O_RDONLY)) != -1)
 	{
-		while(get_next_line(fd, &line) > 0)
+		while (get_next_line(fd, &line) > 0)
 		{
-			if(line)
+			if (line)
 			{
 				i = 0;
 				n = 0;
-				while(line[i + 1])
+				while (line[i + 1])
 				{
 					n += line[i] - 48;
 					n *= 10;
@@ -158,7 +158,7 @@ uint64_t *pb_tab(void)
 	return (tab);
 }
 
-int  is_ontab(uint64_t *tab, uint64_t n)
+int		is_ontab(uint64_t *tab, uint64_t n)
 {
 	int i;
 

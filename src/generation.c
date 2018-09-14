@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 12:03:29 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/06/19 19:33:52 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/14 16:27:14 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	generation(t_puzzle_data *data)
 	int		rep;
 
 	ft_putendl("Renseignez la taille du N-Puzzle (Max : x):");
-	if ((rep = get_next_line(STDIN_FILENO, &line)) > 0 && (data->size = size_verif(line)))
+	if ((rep = get_next_line(STDIN_FILENO, &line)) > 0 &&
+			(data->size = size_verif(line)))
 	{
 		ft_memdel((void**)&line);
 		srand(time(NULL));
