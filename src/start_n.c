@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:54:20 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/14 16:42:27 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:13:58 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	pre_start_a_n(t_puzzle_data *data)
 	add_node(&hash_tab[hash_table_n(start->coor, start->value, data->area)],
 			start);
 	start_a_n(heap, id_goal, hash_tab, data);
-	//lib mem data
 }
 
 void	start_a_n(t_heap *heap, uint64_t id_goal, t_state **hash_tab,
@@ -95,4 +94,19 @@ void	start_a_n(t_heap *heap, uint64_t id_goal, t_state **hash_tab,
 	printf("Complexity in Time (states selected) = %d \n", count);
 	printf("Complexity in Size  (States in memory) = %d \n", count_2);
 	file_print(state, data);
+	ft_memdel((void**)&data->state_coor);
+	ft_memdel((void**)&data->goal_coor);
+	ft_memdel((void**)&data->goal_value);
+	ft_memdel((void**)&data->puzzle);
+	ft_memdel((void**)&data);
+	free_heap(heap);
+	int ri;
+
+	ri = 0;
+	while (ri < 16777216)
+	{
+		free_tree(hash_tab[ri]);
+		ri++;
+	}
+	ft_memdel((void**)&hash_tab);
 }

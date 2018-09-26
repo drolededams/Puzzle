@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:43:42 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/14 16:32:03 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 16:53:43 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ unsigned int		*tab_copy(unsigned int *tab, int size)
 	int				i;
 
 	if (!(copy = (unsigned int*)malloc(sizeof(unsigned int) * size)))
-		exit_alloc_failed();//mem a lib
+		exit_alloc_failed();
 	i = -1;
 	while (++i < size)
 		copy[i] = tab[i];

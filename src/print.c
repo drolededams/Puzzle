@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:47:13 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/25 12:31:28 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:04:26 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@ void	print_puzzle(unsigned int *tab, int n)
 	int j;
 	int k;
 	int u;
-	int cpy;
 	int sqrt;
 
 	i = -1;
 	j = 0;
 	k = 0;
 	sqrt = ft_sqrt(n);
-	cpy = n;
 	u = decimal_number(n);
 	k = 0;
 	while (++i < n)
@@ -51,7 +49,7 @@ void	print_coor(unsigned int *tab, int n)
 	int				i;
 
 	if (!(puz = (unsigned int*)malloc(sizeof(unsigned int) * n)))
-		exit_alloc_failed(); //liberation memoire a faire
+		exit_alloc_failed();
 	i = -1;
 	while (++i < n)
 		puz[tab[i]] = i;
@@ -65,7 +63,7 @@ void	fprint_coor(FILE *fichier, unsigned int *tab, int n)
 	int				i;
 
 	if (!(puz = (unsigned int*)malloc(sizeof(unsigned int) * n)))
-		exit_alloc_failed(); //liberation memoire a faire
+		exit_alloc_failed();
 	i = -1;
 	while (++i < n)
 		puz[tab[i]] = i;
@@ -79,14 +77,12 @@ void	fprint_puzzle(FILE *fichier, unsigned int *tab, int n)
 	int j;
 	int k;
 	int u;
-	int cpy;
 	int sqrt;
 
 	i = -1;
 	j = 0;
 	k = 0;
 	sqrt = ft_sqrt(n);
-	cpy = n;
 	u = decimal_number(n);
 	k = 0;
 	while (++i < n)
@@ -125,45 +121,4 @@ int		decimal_number(int n)
 		d++;
 	}
 	return (d);
-}
-
-void	print_tabint(unsigned int *tab, int n)
-{
-	int i;
-
-	i = 0;
-	while (i < n)
-	{
-		ft_putnbr(i);
-		ft_putstr(" = ");
-		ft_putnbr(tab[i++]);
-		ft_putstr(" | ");
-	}
-	ft_putchar('\n');
-}
-
-void		print_bits(uint64_t n)
-{
-	uint64_t	maxpow;
-	int			i;
-	int			j;
-
-	maxpow = 1 << 31;
-	maxpow = maxpow << 31;
-	maxpow = maxpow << 1;
-	i = 0;
-	j = 0;
-	printf("%" PRIu64 "\n", n);
-	while (i < 64)
-	{
-		while (j < 4)
-		{
-			printf("%u ", !!(n & maxpow));
-			i++;
-			j++;
-			n = n << 1;
-		}
-		printf("\n");
-		j = 0;
-	}
 }

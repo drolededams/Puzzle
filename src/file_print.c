@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 17:06:27 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 13:22:26 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 16:45:12 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,59 +117,6 @@ void			file_print(t_state *state, t_puzzle_data *data)
 		print_coor(print[i], data->area);
 	}
 	printf("Number of Moves = %d \n", move);
-	//free_tab_int((int**)print, move + 1);
 	ft_memdel((void**)&print);
 	ft_memdel((void**)&name);
-}
-
-uint64_t	*pb_tab(void)
-{
-	uint64_t		*tab;
-	uint64_t		n;
-	unsigned int	i;
-	unsigned int	j;
-	char			*line;
-	int				fd;
-
-	if (!(tab = (uint64_t*)malloc(sizeof(uint64_t) * 116)))
-		exit_alloc_failed();
-	i = 0;
-	j = 0;
-	if ((fd = open("table", O_RDONLY)) != -1)
-	{
-		while (get_next_line(fd, &line) > 0)
-		{
-			if (line)
-			{
-				i = 0;
-				n = 0;
-				while (line[i + 1])
-				{
-					n += line[i] - 48;
-					n *= 10;
-					i++;
-				}
-				n += line[i] - 48;
-				tab[j] = n;
-				j++;
-				ft_memdel((void**)&line);
-			}
-		}
-		close(fd);
-	}
-	return (tab);
-}
-
-int		is_ontab(uint64_t *tab, uint64_t n)
-{
-	int i;
-
-	i = 0;
-	while (i < 116)
-	{
-		if (n == tab[i])
-			return (i + 1);
-		i++;
-	}
-	return (0);
 }

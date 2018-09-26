@@ -6,10 +6,10 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:42:36 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 14:00:01 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 16:56:21 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-static int li = 0;
+
 #include "N-Puzzle.h"
 
 void	get_file(char *file, t_puzzle_data *data)
@@ -26,10 +26,9 @@ void	get_file(char *file, t_puzzle_data *data)
 				if (good_line(line))
 					analyse_line(line, data);
 				else
-					exit_bad_line(&line, data, BAD_LINE);
+					exit_bad_line(line, data, BAD_LINE);
 				ft_memdel((void**)&line);
 			}
-			li++;
 		}
 		close(fd);
 	}
@@ -58,22 +57,21 @@ void	analyse_line(char *line, t_puzzle_data *data)
 	char	**split;
 	int		i;
 
-	split = strcomsplit(line, ' '); //leaks
+	split = strcomsplit(line, ' ');
 	if (split == NULL)
-	{
 		return ;
-	}
 	if (split[1] == NULL)
 	{
 		if (data->size != 0)
-			exit_bad_file(&line, split, data, SIZES); // 2 fois la taille
+			exit_bad_file(&line, split, data, SIZES);
 		else if ((data->size = ft_atoi(split[0])) < 2)
-			exit_bad_file(&line, split, data, TOO_LOW);// taille n puzzle trop petit
+			exit_bad_file(&line, split, data, TOO_LOW);
 		data->area = data->size * data->size;
 		free_tab(split);
 		mem_puzzle(data);
 	}
-	else if (data->size != 0 && mat_len_y(split) == data->size && data->size > data->line)
+	else if (data->size != 0 && mat_len_y(split) == data->size &&
+			data->size > data->line)
 	{
 		i = -1;
 		while (split[++i])
@@ -82,5 +80,5 @@ void	analyse_line(char *line, t_puzzle_data *data)
 		free_tab(split);
 	}
 	else
-		exit_bad_file(&line, split, data, NO_SIZE); //pas de taille de tableau || pas assez de chiffre sur la ligne || trop de ligne
+		exit_bad_file(&line, split, data, NO_SIZE);
 }

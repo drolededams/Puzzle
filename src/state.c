@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 19:12:45 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 11:17:44 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:22:57 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_state			*mem_state(uint64_t id, t_state *pre, t_puzzle_data *data)
 		exit_alloc_failed();
 	if (!(state->coor = (unsigned int*)malloc(sizeof(unsigned int) *
 		data->area)))
-		exit_alloc_failed(); //state_corr sert ptete a rien
+		exit_alloc_failed();
 	state->id = id;
 	state->pre = pre;
 	state->left = NULL;

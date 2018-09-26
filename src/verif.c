@@ -6,13 +6,26 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:29:23 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/25 12:36:05 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:33:01 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "N-Puzzle.h"
 
-void	verif_puzzle(t_puzzle_data *data)
+static void	choice(t_puzzle_data *data)
+{
+	ft_putendl("Start:");
+	print_coor(data->state_coor, data->area);
+	ft_putendl("Goal:");
+	print_coor(data->goal_coor, data->area);
+	search_choice(data);
+	if (data->size < 5)
+		pre_start_a(data);
+	else
+		pre_start_a_n(data);
+}
+
+void		verif_puzzle(t_puzzle_data *data)
 {
 	good_numbers(data);
 	coor_alloc(data);
@@ -20,7 +33,7 @@ void	verif_puzzle(t_puzzle_data *data)
 	is_soluble(data, 0);
 }
 
-void	good_numbers(t_puzzle_data *data)
+void		good_numbers(t_puzzle_data *data)
 {
 	unsigned int i;
 
@@ -33,7 +46,7 @@ void	good_numbers(t_puzzle_data *data)
 	}
 }
 
-int		is_in_puzzle(t_puzzle_data *data, unsigned int n)
+int			is_in_puzzle(t_puzzle_data *data, unsigned int n)
 {
 	unsigned int i;
 
@@ -47,7 +60,7 @@ int		is_in_puzzle(t_puzzle_data *data, unsigned int n)
 	return (0);
 }
 
-void	is_soluble(t_puzzle_data *data, int random)
+void		is_soluble(t_puzzle_data *data, int random)
 {
 	unsigned int	i;
 	int				blank_dis;
@@ -67,17 +80,7 @@ void	is_soluble(t_puzzle_data *data, int random)
 		data->size) % 2;
 	permutation = permutation_calc(data) % 2;
 	if (blank_dis == permutation)
-	{
-		ft_putendl("Start:");
-		print_coor(data->state_coor, data->area);
-		ft_putendl("Goal:");
-		print_coor(data->goal_coor, data->area);
-		search_choice(data);
-		if (data->size < 5)
-			pre_start_a(data);
-		else
-			pre_start_a_n(data);
-	}
+		choice(data);
 	else if (random)
 		make_npuzzle(data);
 	else

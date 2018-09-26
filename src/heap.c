@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 14:33:34 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 13:24:41 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 16:51:14 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		realloc_heap(t_heap *heap)
 		exit_alloc_failed();
 	else
 		heap->tab = tmp;
-}//fonctions a test
+}
 
 void		push_heap(t_heap *heap, t_state *state)
 {

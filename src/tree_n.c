@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:03:06 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/06/19 19:08:12 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:27:25 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_state		*search_node_n(t_state *root, uint64_t id, unsigned int *coor,
 	if (root)
 	{
 		if (root->id == id && same_state(root->coor, coor, area))
-			return (root); // a modifier pour puzzle > 4
+			return (root);
 		if (root->id > id)
 			return (search_node_n(root->left, id, coor, area));
 		else
@@ -34,7 +34,7 @@ t_state		**mem_hash_table_n(void)
 	if (!(hash = (t_state**)calloc(16777216, sizeof(t_state*))))
 		exit_alloc_failed();
 	return (hash);
-}// a free
+}
 
 int			same_state(unsigned int *pre, unsigned int *suc, unsigned int area)
 {

@@ -6,16 +6,16 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:30:22 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 13:25:02 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:10:03 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "N-Puzzle.h"
 
-static void free_tree(t_state *node)
+void	free_tree(t_state *node)
 {
 	if (node == NULL)
-		return;
+		return ;
 	free_tree(node->left);
 	free_tree(node->right);
 	if (node->value)
@@ -40,7 +40,6 @@ void	pre_start_a(t_puzzle_data *data)
 	push_heap(heap, start);
 	add_node(&hash_tab[hash_table(start->id, data->area)], start);
 	start_a(heap, id_goal, hash_tab, data);
-	//lib mem data
 }
 
 void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab,
@@ -106,11 +105,10 @@ void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab,
 	int ri;
 
 	ri = 0;
-	while(ri < 1024)
+	while (ri < 1024)
 	{
 		free_tree(hash_tab[ri]);
 		ri++;
 	}
 	ft_memdel((void**)&hash_tab);
 }
-

@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:37:40 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 15:09:41 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 16:40:40 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ ine:");
 	}
 	if (split)
 		free_tab(split);
+	if (data->size != 0)
+		ft_memdel((void**)&data->puzzle);
 	ft_memdel((void**)&data);
-	while(1)
-	{}
 	exit(0);
 }
 
@@ -39,25 +39,27 @@ void	exit_bad_file2(t_puzzle_data *data)
 	if (!data->line)
 		ft_putendl("Bad file");
 	else
+	{
 		ft_putendl("Not enough line");
+		if (data->size != 0)
+			ft_memdel((void**)&data->puzzle);
+	}
 	ft_memdel((void**)&data);
-	while(1)
-	{}
 	exit(0);
 }
 
-void	exit_bad_line(char **line, t_puzzle_data *data, int code)
+void	exit_bad_line(char *line, t_puzzle_data *data, int code)
 {
 	if (code == BAD_LINE)
 		ft_putendl("Bad line in the file:");
-	if (*line)
+	if (line)
 	{
-		ft_putendl(*line);
-		ft_memdel((void**)line);
+		ft_putendl(line);
+		ft_memdel((void**)&line);
 	}
+	if (data->size != 0)
+		ft_memdel((void**)&data->puzzle);
 	ft_memdel((void**)&data);
-	while(1)
-	{}
 	exit(0);
 }
 
@@ -107,8 +109,8 @@ void	exit_bad_puzzle(t_puzzle_data *data, int code)
 		ft_memdel((void**)&data->goal_value);
 		ft_memdel((void**)&data->puzzle);
 	}
+	if (data->size != 0)
+		ft_memdel((void**)&data->puzzle);
 	ft_memdel((void**)&data);
-	while(1)
-	{}
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:52:04 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/06/19 19:06:12 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:22:48 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_state			*mem_state_n(uint64_t id, unsigned int *coor, t_state *pre,
 		exit_alloc_failed();
 	if (!(state->coor = (unsigned int*)malloc(sizeof(unsigned int) *
 		data->area)))
-		exit_alloc_failed(); //state_corr sert ptete a rien
+		exit_alloc_failed();
 	state->id = id;
 	state->pre = pre;
 	state->left = NULL;
