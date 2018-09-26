@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 14:33:34 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/06/19 18:40:53 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 13:24:41 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,6 @@ void		down_heap(t_heap *heap)
 
 void		free_heap(t_heap *heap)
 {
-	ft_memdel((void**)&heap->tab);
-	ft_memdel((void**)&heap);
+	free(heap->tab);
+	free(heap);
 }

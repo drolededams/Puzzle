@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 17:06:27 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/14 16:26:05 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 13:22:26 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ void			file_print(t_state *state, t_puzzle_data *data)
 		print_coor(print[i], data->area);
 	}
 	printf("Number of Moves = %d \n", move);
+	//free_tab_int((int**)print, move + 1);
+	ft_memdel((void**)&print);
 	ft_memdel((void**)&name);
 }
 

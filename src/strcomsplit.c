@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:31:59 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/02/21 19:36:37 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 13:59:46 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ static char		**get_letter(const char *s, char c, char **out)
 		out[y][x] = '\0';
 		y++;
 	}
-	if (s[i - 1] == c && i != 0)
-		free(out[--y]);
+	//if (s[i - 1] == c && i != 0)
+	//	free(out[--y]);
 	out[y] = NULL;
 	return (out);
 }
@@ -68,9 +68,10 @@ char			**strcomsplit(const char *s, char c)
 
 	i = 0;
 	y = 0;
-	if (!(out = (char**)malloc(sizeof(char*) * (ft_wrd_ct(s, c) + 1))))
+	if (ft_wrd_ct(s, c) == 0 || 
+			!(out = (char**)malloc(sizeof(char*) * (ft_wrd_ct(s, c) + 1))))
 		return (NULL);
-	while (s[i] && s[i] != '#')
+	while (s[i] && s[i] != '#' && out != NULL)
 	{
 		while (s[i] && s[i] == c)
 			i++;

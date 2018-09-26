@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 15:06:10 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/14 16:30:33 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/25 12:35:45 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void			search_choice(t_puzzle_data *data)
 		}
 		else
 			data->heu_choice = 0;
+		ft_memdel((void**)&line);
 	}
 	else
 	{

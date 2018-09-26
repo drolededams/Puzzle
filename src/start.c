@@ -6,11 +6,24 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:30:22 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/14 16:39:33 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 13:25:02 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "N-Puzzle.h"
+
+static void free_tree(t_state *node)
+{
+	if (node == NULL)
+		return;
+	free_tree(node->left);
+	free_tree(node->right);
+	if (node->value)
+		free(node->value);
+	if (node->coor)
+		free(node->coor);
+	free(node);
+}
 
 void	pre_start_a(t_puzzle_data *data)
 {
@@ -84,4 +97,20 @@ void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab,
 	printf("Complexity in Size  (States in memory) = %d \n", count_2);
 	printf("h size = %d\n", H_SIZE);
 	file_print(state, data);
+	ft_memdel((void**)&data->state_coor);
+	ft_memdel((void**)&data->goal_coor);
+	ft_memdel((void**)&data->goal_value);
+	ft_memdel((void**)&data->puzzle);
+	ft_memdel((void**)&data);
+	free_heap(heap);
+	int ri;
+
+	ri = 0;
+	while(ri < 1024)
+	{
+		free_tree(hash_tab[ri]);
+		ri++;
+	}
+	ft_memdel((void**)&hash_tab);
 }
+

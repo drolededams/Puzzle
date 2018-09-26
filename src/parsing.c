@@ -6,10 +6,10 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:42:36 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/03/06 11:28:14 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 14:00:01 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+static int li = 0;
 #include "N-Puzzle.h"
 
 void	get_file(char *file, t_puzzle_data *data)
@@ -29,6 +29,7 @@ void	get_file(char *file, t_puzzle_data *data)
 					exit_bad_line(&line, data, BAD_LINE);
 				ft_memdel((void**)&line);
 			}
+			li++;
 		}
 		close(fd);
 	}
@@ -58,7 +59,7 @@ void	analyse_line(char *line, t_puzzle_data *data)
 	int		i;
 
 	split = strcomsplit(line, ' '); //leaks
-	if (split[0] == NULL)
+	if (split == NULL)
 	{
 		return ;
 	}

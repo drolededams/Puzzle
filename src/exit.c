@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:37:40 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/14 16:21:43 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 15:09:41 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ ine:");
 	if (split)
 		free_tab(split);
 	ft_memdel((void**)&data);
+	while(1)
+	{}
 	exit(0);
 }
 
@@ -39,6 +41,8 @@ void	exit_bad_file2(t_puzzle_data *data)
 	else
 		ft_putendl("Not enough line");
 	ft_memdel((void**)&data);
+	while(1)
+	{}
 	exit(0);
 }
 
@@ -52,6 +56,8 @@ void	exit_bad_line(char **line, t_puzzle_data *data, int code)
 		ft_memdel((void**)line);
 	}
 	ft_memdel((void**)&data);
+	while(1)
+	{}
 	exit(0);
 }
 
@@ -72,7 +78,7 @@ void	free_tab(char **tab)
 		i++;
 	}
 	ft_memdel((void**)&tab[i]);
-	ft_memdel((void**)tab);
+	ft_memdel((void*)&tab);
 }
 
 void	free_tab_int(int **tab, int area)
@@ -86,7 +92,7 @@ void	free_tab_int(int **tab, int area)
 		i++;
 	}
 	ft_memdel((void**)&tab[i]);
-	ft_memdel((void**)tab);
+	ft_memdel((void*)&tab);
 }
 
 void	exit_bad_puzzle(t_puzzle_data *data, int code)
@@ -94,7 +100,15 @@ void	exit_bad_puzzle(t_puzzle_data *data, int code)
 	if (code == NUMBER_MISSING)
 		ft_putendl("Number missing in the N-Puzzle.");
 	else if (code == IMPOSSIBLE)
+	{
 		ft_putendl("The N-Puzzle can't be solved.");
+		ft_memdel((void**)&data->state_coor);
+		ft_memdel((void**)&data->goal_coor);
+		ft_memdel((void**)&data->goal_value);
+		ft_memdel((void**)&data->puzzle);
+	}
 	ft_memdel((void**)&data);
+	while(1)
+	{}
 	exit(0);
 }
