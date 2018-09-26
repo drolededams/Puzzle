@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:03:58 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/06 10:00:08 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:07:33 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void			mem_puzzle(t_puzzle_data *data);
 void			exit_bad_file(char **line, char **split, t_puzzle_data *data,
 		int code);
 void			exit_bad_file2(t_puzzle_data *data);
-void			exit_bad_line(char **line, t_puzzle_data *data, int code);
+void			exit_bad_line(char *line, t_puzzle_data *data, int code);
 void			exit_alloc_failed(void);
 char			**strcomsplit(const char *s, char c);
 void			free_tab(char **tab);
@@ -131,8 +131,6 @@ int				decimal_number(int n);
 
 void			print_coor(unsigned int *tab, int n);
 void			print_puzzle(unsigned int *tab, int n);
-void			print_tabint(unsigned int *tab, int n);
-void			print_bits(uint64_t n);
 void			fprint_puzzle(FILE *fichier, unsigned int *tab, int n);
 void			fprint_coor(FILE *fichier, unsigned int *tab, int n);
 void			file_print(t_state *state, t_puzzle_data *data);
@@ -164,6 +162,7 @@ int				move_count(t_state *state);
 void			pre_start_a(t_puzzle_data *data);
 void			start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab,
 		t_puzzle_data *data);
+void			free_tree(t_state *node);
 
 unsigned int	manhattan_dist(unsigned int *state, t_puzzle_data *data);
 unsigned int	hamming_dist(unsigned int *state, t_puzzle_data *data);
@@ -198,6 +197,4 @@ t_state			**mem_hash_table_n(void);
 int				same_state(unsigned int *pre, unsigned int *suc,
 		unsigned int area);
 unsigned int	*puz_alloc(unsigned int area);
-uint64_t		*pb_tab(void);
-int				is_ontab(uint64_t *tab, uint64_t n);
 #endif
