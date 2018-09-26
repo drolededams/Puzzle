@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:03:58 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 17:07:33 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 18:14:55 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,6 @@
 # define BAD_FILE 5
 # define NUMBER_MISSING 1
 # define IMPOSSIBLE 2
-# define H_SIZE heap->size
-# define H_MAX heap->max
-# define H_LAST heap->tab[heap->size]
-# define H_I heap->tab[i]
-# define H_I_IH heap->tab[i]->i_heap
-# define H_I_F H_I->cost + H_I->heu
-# define H_FATH heap->tab[father]
-# define H_FATH_IH heap->tab[father]->i_heap
-# define H_FATH_F H_FATH->cost + H_FATH->heu
-# define H_DOWN heap->tab[i_down]
-# define H_DOWN_IH heap->tab[i_down]->i_heap
-# define H_DOWN_1 heap->tab[i_down + 1]
-# define H_DOWN_F heap->tab[i_down]->cost + heap->tab[i_down]->heu
-# define H_DOWN_1_F heap->tab[i_down + 1]->cost + heap->tab[i_down + 1]->heu
-# define H_UP heap->tab[i_up]
-# define H_UP_IH heap->tab[i_up]->i_heap
-# define H_UP_F heap->tab[i_up]->cost + heap->tab[i_up]->heu
-# define HASH state->hash
-# define ID state->id
-# define HEU_CHOICE data->heu_choice
-# define SIZE data->size
-# define AREA data->area
 
 typedef struct	s_state
 {

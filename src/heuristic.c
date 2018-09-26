@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 15:06:10 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/25 12:35:45 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 18:15:00 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,20 @@ unsigned int	linear_conflict(unsigned int *state, t_puzzle_data *data)
 	while (i < data->area)
 	{
 		j = 1;
-		line = state[i] / SIZE;
-		col = state[i] % SIZE;
+		line = state[i] / data->size;
+		col = state[i] % data->size;
 		while (j < data->area)
 		{
 			if (i != j)
 			{
-				if (line == (state[j] / SIZE) && line == (data->goal_coor[i]
-							/ SIZE) && line == (data->goal_coor[j] / SIZE) &&
-						state[i] > state[j] && data->goal_coor[i]
-						< data->goal_coor[j])
+				if (line == (state[j] / data->size) && line ==
+						(data->goal_coor[i] / data->size) && line ==
+						(data->goal_coor[j] / data->size) && state[i] >
+						state[j] && data->goal_coor[i] < data->goal_coor[j])
 					heu += 2;
-				else if (col == (state[j] % SIZE) && col == (data->goal_coor[i]
-							% SIZE) && col == (data->goal_coor[j] % SIZE) &&
+				else if (col == (state[j] % data->size) && col ==
+						(data->goal_coor[i] % data->size) && col ==
+						(data->goal_coor[j] % data->size) &&
 						state[i] > state[j] && data->goal_coor[i] <
 						data->goal_coor[j])
 					heu += 2;
@@ -123,7 +124,7 @@ void			heuristic_choice(t_puzzle_data *data)
 	ft_putendl("2: Manhattan Distance");
 	ft_putendl("3: Hamming Distance");
 	if ((rep = get_next_line(STDIN_FILENO, &line)) > 0 &&
-			(HEU_CHOICE = choice_verif(line)))
+			(data->heu_choice = choice_verif(line)))
 	{
 		ft_memdel((void**)&line);
 	}

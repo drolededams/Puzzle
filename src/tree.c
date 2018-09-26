@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:03:06 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 17:27:11 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:44:31 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		add_node(t_state **root, t_state *state)
 {
 	if (*root == NULL)
 		*root = state;
-	else if ((*root)->id > ID)
+	else if ((*root)->id > state->id)
 		add_node(&(*root)->left, state);
 	else
 		add_node(&(*root)->right, state);

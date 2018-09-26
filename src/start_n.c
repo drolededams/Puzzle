@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:54:20 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 17:13:58 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 17:48:07 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	start_a_n(t_heap *heap, uint64_t id_goal, t_state **hash_tab,
 	success = 0;
 	count = 0;
 	count_2 = 1;
-	while (H_SIZE > 0 && !success)
+	while (heap->size > 0 && !success)
 	{
 		count++;
 		state = pop_heap(heap);

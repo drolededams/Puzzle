@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 14:33:34 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 16:51:14 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/26 18:11:38 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ t_heap		*mem_heap(void)
 
 	if (!(heap = (t_heap*)malloc(sizeof(t_heap))))
 		exit_alloc_failed();
-	H_MAX = 524288;
-	if (!(heap->tab = (t_state**)malloc(sizeof(t_state*) * H_MAX)))
+	heap->max = 524288;
+	if (!(heap->tab = (t_state**)malloc(sizeof(t_state*) * heap->max)))
 		exit_alloc_failed();
-	H_SIZE = 0;
+	heap->size = 0;
 	return (heap);
 }
 
@@ -29,8 +29,8 @@ void		realloc_heap(t_heap *heap)
 {
 	t_state **tmp;
 
-	H_MAX = H_MAX << 1;
-	if (!(tmp = (t_state**)realloc(heap->tab, sizeof(t_state*) * H_MAX)))
+	heap->max = heap->max << 1;
+	if (!(tmp = (t_state**)realloc(heap->tab, sizeof(t_state*) * heap->max)))
 		exit_alloc_failed();
 	else
 		heap->tab = tmp;
@@ -38,13 +38,13 @@ void		realloc_heap(t_heap *heap)
 
 void		push_heap(t_heap *heap, t_state *state)
 {
-	H_SIZE++;
-	if (H_SIZE >= H_MAX)
+	heap->size++;
+	if (heap->size >= heap->max)
 		realloc_heap(heap);
-	H_LAST = state;
-	state->i_heap = H_SIZE;
-	if (H_SIZE != 1)
-		up_heap(heap, H_SIZE);
+	heap->tab[heap->size] = state;
+	state->i_heap = heap->size;
+	if (heap->size != 1)
+		up_heap(heap, heap->size);
 }
 
 void		up_heap(t_heap *heap, int i)
@@ -54,14 +54,15 @@ void		up_heap(t_heap *heap, int i)
 	t_state	*s_tmp;
 
 	father = i >> 1;
-	while (i > 1 && H_FATH_F > H_I_F)
+	while (i > 1 && heap->tab[father]->cost + heap->tab[father]->heu >
+			heap->tab[i]->cost + heap->tab[i]->heu)
 	{
-		i_heap_tmp = H_FATH_IH;
-		H_FATH_IH = H_I_IH;
-		H_I_IH = i_heap_tmp;
-		s_tmp = H_FATH;
-		H_FATH = H_I;
-		H_I = s_tmp;
+		i_heap_tmp = heap->tab[father]->i_heap;
+		heap->tab[father]->i_heap = heap->tab[i]->i_heap;
+		heap->tab[i]->i_heap = i_heap_tmp;
+		s_tmp = heap->tab[father];
+		heap->tab[father] = heap->tab[i];
+		heap->tab[i] = s_tmp;
 		i = father;
 		father = father >> 1;
 	}
@@ -71,19 +72,19 @@ t_state		*pop_heap(t_heap *heap)
 {
 	t_state *best;
 
-	if (!H_SIZE)
+	if (!heap->size)
 		return (NULL);
 	best = heap->tab[1];
 	best->i_heap = 0;
-	if (H_SIZE != 1)
+	if (heap->size != 1)
 	{
-		heap->tab[1] = H_LAST;
+		heap->tab[1] = heap->tab[heap->size];
 		heap->tab[1]->i_heap = 1;
 	}
 	else
 		heap->tab[1] = NULL;
-	H_SIZE--;
-	if (H_SIZE)
+	heap->size--;
+	if (heap->size)
 		down_heap(heap);
 	return (best);
 }
@@ -96,17 +97,20 @@ void		down_heap(t_heap *heap)
 
 	i_up = 1;
 	i_down = 2;
-	while (i_down <= H_SIZE)
+	while (i_down <= heap->size)
 	{
-		if (i_down + 1 <= H_SIZE && H_DOWN_F > H_DOWN_1_F)
+		if (i_down + 1 <= heap->size && heap->tab[i_down]->cost +
+				heap->tab[i_down]->heu > heap->tab[i_down + 1]->cost +
+				heap->tab[i_down + 1]->heu)
 			i_down++;
-		if (H_DOWN_F < H_UP_F)
+		if (heap->tab[i_down]->cost + heap->tab[i_down]->heu <
+				heap->tab[i_up]->cost + heap->tab[i_up]->heu)
 		{
-			H_DOWN_IH = i_up;
-			H_UP_IH = i_down;
-			tmp = H_DOWN;
-			H_DOWN = H_UP;
-			H_UP = tmp;
+			heap->tab[i_down]->i_heap = i_up;
+			heap->tab[i_up]->i_heap = i_down;
+			tmp = heap->tab[i_down];
+			heap->tab[i_down] = heap->tab[i_up];
+			heap->tab[i_up] = tmp;
 		}
 		i_up = i_down;
 		i_down = i_down << 1;
