@@ -6,12 +6,12 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:03:58 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/27 19:12:54 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 19:54:20 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef N_PUZZLE_H
-# define N_PUZZLE_H
+#ifndef NPUZZLE_H
+# define NPUZZLE_H
 # include "../libft/includes/libft.h"
 # include <fcntl.h>
 # include <stdio.h>

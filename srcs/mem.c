@@ -6,11 +6,11 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:57:48 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/06/19 18:46:06 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 19:59:06 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "N-Puzzle.h"
+#include "../inc/npuzzle.h"
 
 void			mem_puzzle(t_puzzle_data *data)
 {

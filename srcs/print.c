@@ -6,11 +6,11 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:47:13 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/27 15:39:47 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 19:59:06 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "N-Puzzle.h"
+#include "../inc/npuzzle.h"
 
 void			print_puzzle(unsigned int *tab, t_puzzle_data *data)
 {

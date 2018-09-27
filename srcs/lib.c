@@ -6,11 +6,11 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:43:42 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/27 18:22:58 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 19:59:06 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "N-Puzzle.h"
+#include "../inc/npuzzle.h"
 
 void				swap_tabint(unsigned int *tab, int a, int b)
 {

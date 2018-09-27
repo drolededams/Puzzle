@@ -6,11 +6,11 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 15:06:10 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/27 15:45:33 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 19:59:06 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "N-Puzzle.h"
+#include "../inc/npuzzle.h"
 
 unsigned int		hamming_dist(unsigned int *state, t_puzzle_data *data)
 {

@@ -6,11 +6,11 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:31:59 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 17:26:43 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 19:59:07 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "N-Puzzle.h"
+#include "../inc/npuzzle.h"
 
 static int		ft_wrd_ct(const char *s, char c)
 {

@@ -6,11 +6,11 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:52:04 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 17:22:48 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 19:59:06 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "N-Puzzle.h"
+#include "../inc/npuzzle.h"
 
 t_state			*mem_state_n(uint64_t id, unsigned int *coor, t_state *pre,
 		t_puzzle_data *data)
