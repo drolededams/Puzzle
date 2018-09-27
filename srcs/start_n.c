@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:54:20 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/27 19:13:08 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 19:27:17 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ static void	free_n_all(t_puzzle_data *data, t_state **hash_tab, t_heap *heap)
 static void	display_n_result(t_puzzle_data *data, t_heap *heap,
 		t_state **hash_tab)
 {
-	printf("Complexity in Time (States selected) = %d \n", data->com_time);
-	printf("Complexity in Size  (States in memory) = %d \n", data->com_size);
+	printf("Complexity in Time (States selected) = %u \n", data->com_time);
+	printf("Complexity in Size  (States in memory) = %u \n", data->com_size);
 	file_print(data->cur, data);
 	free_n_all(data, hash_tab, heap);
 }
