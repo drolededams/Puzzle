@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:42:36 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/27 14:03:07 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 19:42:09 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void		analyse_line(char *line, t_puzzle_data *data)
 	{
 		if (data->size != 0)
 			exit_bad_file(&line, split, data, SIZES);
-		else if ((data->size = ft_atoi(split[0])) < 2)
+		else if ((data->size = ft_atoi(split[0])) < 2 || data->size > 5)
 			exit_bad_file(&line, split, data, TOO_LOW);
 		data->area = data->size * data->size;
 		free_tab(split);

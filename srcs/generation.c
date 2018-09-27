@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 12:03:29 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/14 16:27:14 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 19:43:37 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	generation(t_puzzle_data *data)
 	char	*line;
 	int		rep;
 
-	ft_putendl("Renseignez la taille du N-Puzzle (Max : x):");
+	ft_putendl("Renseignez la taille du N-Puzzle (Max : 5):");
 	if ((rep = get_next_line(STDIN_FILENO, &line)) > 0 &&
 			(data->size = size_verif(line)))
 	{
@@ -69,12 +69,12 @@ int		size_verif(char *s)
 	}
 	if (ft_strlen(s) > 2)
 	{
-		ft_putendl("La taille doit 2 < n <= 15");
+		ft_putendl("La taille doit 2 <= n <= 5");
 		return (0);
 	}
-	if (ft_atoi(s) < 2 || ft_atoi(s) > 15)
+	if (ft_atoi(s) < 2 || ft_atoi(s) > 5)
 	{
-		ft_putendl("La taille doit 2 < n <= 15");
+		ft_putendl("La taille doit 2 <= n <= 5");
 		return (0);
 	}
 	return (ft_atoi(s));

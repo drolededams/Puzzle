@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:37:40 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 16:40:40 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 19:42:15 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	exit_bad_file(char **line, char **split, t_puzzle_data *data, int code)
 	if (code == SIZES)
 		ft_putendl("One size is enough:");
 	else if (code == TOO_LOW)
-		ft_putendl("The size must be >= 2:");
+		ft_putendl("The size must be >= 2 and <=5:");
 	else if (code == NO_SIZE)
 		ft_putendl("Size missing or not enough numbers in a line or too much l\
 ine:");
@@ -28,7 +28,7 @@ ine:");
 	}
 	if (split)
 		free_tab(split);
-	if (data->size != 0)
+	if (data->size > 1 && data->size < 6)
 		ft_memdel((void**)&data->puzzle);
 	ft_memdel((void**)&data);
 	exit(0);
