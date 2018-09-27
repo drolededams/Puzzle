@@ -6,30 +6,50 @@
 #    By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/05/12 15:32:27 by dgameiro          #+#    #+#              #
-#    Updated: 2018/03/07 17:07:28 by dgameiro         ###   ########.fr        #
+#    Updated: 2018/09/27 12:30:51 by dgameiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = src/main.c src/strcomsplit.c src/verif.c src/math.c src/generation.c src/exit.c src/parsing.c src/lib.c src/print.c src/mem.c \
-	  src/heap.c src/tree.c src/state.c src/start.c src/heuristic.c src/start_n.c src/state_n.c src/tree_n.c src/file_print.c
+.PHONY: all, clean, fclean, re
 
-INC = -I./inc
+SRC_PATH = srcs
+
+SRC_NAME = main.c strcomsplit.c verif.c math.c generation.c exit.c parsing.c lib.c print.c mem.c heap.c tree.c state.c start.c heuristic.c start_n.c state_n.c tree_n.c file_print.c
+
+OBJ_PATH = objs
+
+CPPFLAGS = -Iinc
+
+LDFLAGS = -Llibft
+LDLIBS = -lft
 
 NAME = N-Puzzle
 
-FLAGS = -Wall -Werror -Wextra
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
 
+OBJ_NAME = $(SRC_NAME:.c=.o)
 
-$(NAME):
-	@make -C ./libft
-	@gcc $(FLAGS) $(SRC) $(INC) -L libft/ -lft -o $(NAME)
+SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 all: $(NAME)
 
+$(NAME): $(OBJ)
+	@make -C ./libft
+	@$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@
+
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
+	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
+
 clean :
-	@make -C libft/ fclean
+	@make clean -C libft
+	@rm -fv $(OBJ)
+	@rmdir $(OBJ_PATH) 2> /dev/null || true
 
 fclean : clean
-	@/bin/rm -f $(NAME)
+	@make fclean -C libft
+	@rm -fv $(NAME)
 
 re : fclean all

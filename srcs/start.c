@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:30:22 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 17:47:41 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 12:52:03 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab,
 	}
 	printf("Complexity in Time (states selected) = %d \n", count);
 	printf("Complexity in Size  (States in memory) = %d \n", count_2);
-	printf("h size = %d\n", heap->size);
 	file_print(state, data);
 	ft_memdel((void**)&data->state_coor);
 	ft_memdel((void**)&data->goal_coor);
