@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:29:23 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 17:33:01 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 15:43:57 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static void	choice(t_puzzle_data *data)
 {
 	ft_putendl("Start:");
-	print_coor(data->state_coor, data->area);
+	print_coor(data->state_coor, data);
 	ft_putendl("Goal:");
-	print_coor(data->goal_coor, data->area);
+	print_coor(data->goal_coor, data);
 	search_choice(data);
 	if (data->size < 5)
 		pre_start_a(data);

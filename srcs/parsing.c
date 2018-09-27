@@ -6,13 +6,13 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:42:36 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 16:56:21 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 14:03:07 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "N-Puzzle.h"
 
-void	get_file(char *file, t_puzzle_data *data)
+void		get_file(char *file, t_puzzle_data *data)
 {
 	int		fd;
 	char	*line;
@@ -36,7 +36,7 @@ void	get_file(char *file, t_puzzle_data *data)
 		exit_bad_file2(data);
 }
 
-int		good_line(char *line)
+int			good_line(char *line)
 {
 	int i;
 
@@ -52,10 +52,20 @@ int		good_line(char *line)
 	return (i);
 }
 
-void	analyse_line(char *line, t_puzzle_data *data)
+static void	fill_line(t_puzzle_data *data, char **split)
+{
+	int		i;
+
+	i = -1;
+	while (split[++i])
+		data->puzzle[data->line * data->size + i] = ft_atoi(split[i]);
+	data->line++;
+	free_tab(split);
+}
+
+void		analyse_line(char *line, t_puzzle_data *data)
 {
 	char	**split;
-	int		i;
 
 	split = strcomsplit(line, ' ');
 	if (split == NULL)
@@ -72,13 +82,7 @@ void	analyse_line(char *line, t_puzzle_data *data)
 	}
 	else if (data->size != 0 && mat_len_y(split) == data->size &&
 			data->size > data->line)
-	{
-		i = -1;
-		while (split[++i])
-			data->puzzle[data->line * data->size + i] = ft_atoi(split[i]);
-		data->line++;
-		free_tab(split);
-	}
+		fill_line(data, split);
 	else
 		exit_bad_file(&line, split, data, NO_SIZE);
 }

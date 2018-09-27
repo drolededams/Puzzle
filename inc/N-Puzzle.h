@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:03:58 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 18:14:55 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 19:12:54 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,17 @@ typedef struct	s_puzzle_data
 	unsigned int			size;
 	unsigned int			area;
 	unsigned int			line;
+	unsigned int			com_time;
+	unsigned int			com_size;
 	unsigned int			heu_choice;
+	t_state					*cur;
 	int						search_cost;
 	unsigned int			*puzzle;
 	unsigned int			*state_coor;
 	unsigned int			*goal_coor;
 	unsigned int			*goal_value;
+	unsigned int			*su_coor;
+	unsigned int			*su_val;
 	int						(*coor[4])(int d, int v, int im, int size);
 	unsigned int			(*heu[3])(unsigned int *state,
 							struct s_puzzle_data *data);
@@ -105,12 +110,14 @@ int				is_num(char *s);
 void			make_npuzzle(t_puzzle_data *data);
 void			random_tab(unsigned int *tab, int n);
 void			swap_tabint(unsigned int *tab, int a, int b);
-int				decimal_number(int n);
+unsigned int	decimal_number(unsigned int n);
 
-void			print_coor(unsigned int *tab, int n);
-void			print_puzzle(unsigned int *tab, int n);
-void			fprint_puzzle(FILE *fichier, unsigned int *tab, int n);
-void			fprint_coor(FILE *fichier, unsigned int *tab, int n);
+void			print_coor(unsigned int *tab, t_puzzle_data *data);
+void			print_puzzle(unsigned int *tab, t_puzzle_data *data);
+void			fprint_puzzle(FILE *fichier, unsigned int *tab,
+		t_puzzle_data *data);
+void			fprint_coor(FILE *fichier, unsigned int *tab,
+		t_puzzle_data *data);
 void			file_print(t_state *state, t_puzzle_data *data);
 char			*file_name(t_puzzle_data *data);
 

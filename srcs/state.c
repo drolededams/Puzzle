@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 19:12:45 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 17:22:57 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 18:22:56 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,14 @@ unsigned int	hash_table(uint64_t id, unsigned int area)
 	i = 0;
 	hash = 0;
 	while (x != 0)
-	{
-		x = (id >> 4 * i) & 0xF;
-		i++;
-	}
+		x = (id >> 4 * i++) & 0xF;
 	if (i == 1)
 	{
 		hash = (id >> 4) & 0xF;
 		hash = hash << 8;
 	}
 	else if (i == area)
-	{
-		hash = i - 1;
-		hash = (hash << 4) | ((id >> 4 * (i - 2)) & 0xF);
-	}
+		hash = ((i - 1) << 4) | ((id >> 4 * (i - 2)) & 0xF);
 	else
 	{
 		hash = (id >> (4 * i)) & 0xF;

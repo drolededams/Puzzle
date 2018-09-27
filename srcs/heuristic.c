@@ -6,13 +6,13 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 15:06:10 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 18:15:00 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 15:45:33 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "N-Puzzle.h"
 
-unsigned int	hamming_dist(unsigned int *state, t_puzzle_data *data)
+unsigned int		hamming_dist(unsigned int *state, t_puzzle_data *data)
 {
 	unsigned int i;
 	unsigned int heu;
@@ -28,7 +28,7 @@ unsigned int	hamming_dist(unsigned int *state, t_puzzle_data *data)
 	return (heu);
 }
 
-unsigned int	manhattan_dist(unsigned int *state, t_puzzle_data *data)
+unsigned int		manhattan_dist(unsigned int *state, t_puzzle_data *data)
 {
 	unsigned int i;
 	unsigned int heu;
@@ -43,12 +43,33 @@ unsigned int	manhattan_dist(unsigned int *state, t_puzzle_data *data)
 	return (heu);
 }
 
-unsigned int	linear_conflict(unsigned int *state, t_puzzle_data *data)
+static unsigned int	calc_linear(unsigned int *state, t_puzzle_data *data,
+		unsigned int i, unsigned int j)
+{
+	unsigned int line;
+	unsigned int col;
+
+	line = state[i] / data->size;
+	col = state[i] % data->size;
+	if (line == (state[j] / data->size) && line ==
+			(data->goal_coor[i] / data->size) && line ==
+			(data->goal_coor[j] / data->size) && state[i] >
+			state[j] && data->goal_coor[i] < data->goal_coor[j])
+		return (2);
+	else if (col == (state[j] % data->size) && col ==
+			(data->goal_coor[i] % data->size) && col ==
+			(data->goal_coor[j] % data->size) &&
+			state[i] > state[j] && data->goal_coor[i] <
+			data->goal_coor[j])
+		return (2);
+	else
+		return (0);
+}
+
+unsigned int		linear_conflict(unsigned int *state, t_puzzle_data *data)
 {
 	unsigned int i;
 	unsigned int j;
-	unsigned int line;
-	unsigned int col;
 	unsigned int heu;
 
 	heu = data->heu[1](state, data);
@@ -56,24 +77,10 @@ unsigned int	linear_conflict(unsigned int *state, t_puzzle_data *data)
 	while (i < data->area)
 	{
 		j = 1;
-		line = state[i] / data->size;
-		col = state[i] % data->size;
 		while (j < data->area)
 		{
 			if (i != j)
-			{
-				if (line == (state[j] / data->size) && line ==
-						(data->goal_coor[i] / data->size) && line ==
-						(data->goal_coor[j] / data->size) && state[i] >
-						state[j] && data->goal_coor[i] < data->goal_coor[j])
-					heu += 2;
-				else if (col == (state[j] % data->size) && col ==
-						(data->goal_coor[i] % data->size) && col ==
-						(data->goal_coor[j] % data->size) &&
-						state[i] > state[j] && data->goal_coor[i] <
-						data->goal_coor[j])
-					heu += 2;
-			}
+				heu += calc_linear(state, data, i, j);
 			j++;
 		}
 		i++;
@@ -81,25 +88,29 @@ unsigned int	linear_conflict(unsigned int *state, t_puzzle_data *data)
 	return (heu);
 }
 
-void			search_choice(t_puzzle_data *data)
+static void			print_search_choice(void)
+{
+	ft_putendl("Type a number to choose a Search Algorithme:");
+	ft_putendl("1: A*");
+	ft_putendl("2: Greedy Search");
+	ft_putendl("3: Uniform Cost");
+}
+
+void				search_choice(t_puzzle_data *data)
 {
 	char	*line;
 	int		choice;
 	int		rep;
 
-	ft_putendl("Type a number to choose a Search Algorithme:");
-	ft_putendl("1: A*");
-	ft_putendl("2: Greedy Search");
-	ft_putendl("3: Uniform Cost");
+	print_search_choice();
 	if ((rep = get_next_line(STDIN_FILENO, &line)) > 0 &&
 			(choice = choice_verif(line)))
 	{
 		data->search_cost = 1;
-		if (choice == 1)
-			heuristic_choice(data);
-		else if (choice == 2)
+		if (choice == 1 || choice == 2)
 		{
-			data->search_cost = 0;
+			if (choice == 2)
+				data->search_cost = 0;
 			heuristic_choice(data);
 		}
 		else
@@ -114,7 +125,7 @@ void			search_choice(t_puzzle_data *data)
 	}
 }
 
-void			heuristic_choice(t_puzzle_data *data)
+void				heuristic_choice(t_puzzle_data *data)
 {
 	char	*line;
 	int		rep;
@@ -136,7 +147,7 @@ void			heuristic_choice(t_puzzle_data *data)
 	}
 }
 
-int				choice_verif(char *s)
+int					choice_verif(char *s)
 {
 	if (!is_num(s))
 	{

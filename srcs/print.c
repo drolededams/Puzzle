@@ -6,111 +6,107 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:47:13 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/26 17:04:26 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 15:39:47 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "N-Puzzle.h"
 
-void	print_puzzle(unsigned int *tab, int n)
+void			print_puzzle(unsigned int *tab, t_puzzle_data *data)
 {
-	int i;
-	int j;
-	int k;
-	int u;
-	int sqrt;
+	unsigned int i;
+	unsigned int j;
+	unsigned int k;
+	unsigned int u;
 
-	i = -1;
-	j = 0;
+	i = 0;
 	k = 0;
-	sqrt = ft_sqrt(n);
-	u = decimal_number(n);
-	k = 0;
-	while (++i < n)
+	u = decimal_number(data->area);
+	while (i < data->area)
 	{
-		while (j++ < sqrt - 1)
+		j = 0;
+		while (j++ < data->size - 1)
 		{
 			k = decimal_number(tab[i]);
-			while (k != u)
-			{
+			while (k++ != u)
 				printf(" ");
-				k++;
-			}
 			printf("%u ", tab[i++]);
 		}
+		k = decimal_number(tab[i]);
+		while (k++ != u)
+			printf(" ");
 		printf("%u\n", tab[i]);
-		j = 0;
+		i++;
 	}
 }
 
-void	print_coor(unsigned int *tab, int n)
+void			print_coor(unsigned int *tab, t_puzzle_data *data)
 {
 	unsigned int	*puz;
-	int				i;
+	unsigned int	i;
 
-	if (!(puz = (unsigned int*)malloc(sizeof(unsigned int) * n)))
+	if (!(puz = (unsigned int*)malloc(sizeof(unsigned int) * data->area)))
 		exit_alloc_failed();
-	i = -1;
-	while (++i < n)
-		puz[tab[i]] = i;
-	print_puzzle(puz, n);
-	ft_memdel((void*)&puz);
-}
-
-void	fprint_coor(FILE *fichier, unsigned int *tab, int n)
-{
-	unsigned int	*puz;
-	int				i;
-
-	if (!(puz = (unsigned int*)malloc(sizeof(unsigned int) * n)))
-		exit_alloc_failed();
-	i = -1;
-	while (++i < n)
-		puz[tab[i]] = i;
-	fprint_puzzle(fichier, puz, n);
-	ft_memdel((void*)&puz);
-}
-
-void	fprint_puzzle(FILE *fichier, unsigned int *tab, int n)
-{
-	int i;
-	int j;
-	int k;
-	int u;
-	int sqrt;
-
-	i = -1;
-	j = 0;
-	k = 0;
-	sqrt = ft_sqrt(n);
-	u = decimal_number(n);
-	k = 0;
-	while (++i < n)
+	i = 0;
+	while (i < data->area)
 	{
-		while (j++ < sqrt - 1)
+		puz[tab[i]] = i;
+		i++;
+	}
+	print_puzzle(puz, data);
+	ft_memdel((void*)&puz);
+}
+
+void			fprint_coor(FILE *fichier, unsigned int *tab,
+		t_puzzle_data *data)
+{
+	unsigned int	*puz;
+	unsigned int	i;
+
+	if (!(puz = (unsigned int*)malloc(sizeof(unsigned int) * data->area)))
+		exit_alloc_failed();
+	i = 0;
+	while (i < data->area)
+	{
+		puz[tab[i]] = i;
+		i++;
+	}
+	fprint_puzzle(fichier, puz, data);
+	ft_memdel((void*)&puz);
+}
+
+void			fprint_puzzle(FILE *fichier, unsigned int *tab,
+		t_puzzle_data *data)
+{
+	unsigned int i;
+	unsigned int j;
+	unsigned int k;
+	unsigned int u;
+
+	i = 0;
+	k = 0;
+	u = decimal_number(data->area);
+	while (i < data->area)
+	{
+		j = 0;
+		while (j++ < data->size - 1)
 		{
 			k = decimal_number(tab[i]);
-			while (k != u)
-			{
+			while (k++ != u)
 				fprintf(fichier, " ");
-				k++;
-			}
 			fprintf(fichier, "%u ", tab[i++]);
 		}
 		k = decimal_number(tab[i]);
-		while (k != u)
-		{
+		while (k++ != u)
 			fprintf(fichier, " ");
-			k++;
-		}
 		fprintf(fichier, "%u\n", tab[i]);
-		j = 0;
+		i++;
 	}
 }
 
-int		decimal_number(int n)
+unsigned int	decimal_number(unsigned int n)
 {
-	int d;
+	unsigned int d;
 
 	d = 0;
 	if (!n)

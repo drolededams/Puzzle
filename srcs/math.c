@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 11:40:13 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/06/19 18:43:55 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/27 13:41:48 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,8 @@ int		find_final_coor(t_puzzle_data *data, int value)
 
 int		permutation_calc(t_puzzle_data *data)
 {
-	int				i;
-	int				j;
-	int				size;
+	unsigned int	i;
+	unsigned int	j;
 	int				perm;
 	unsigned int	*copy;
 
@@ -96,10 +95,9 @@ int		permutation_calc(t_puzzle_data *data)
 	j = 1;
 	perm = 0;
 	copy = tab_copy(data->state_coor, data->size * data->size);
-	size = data->size * data->size - 1;
-	while (i < size)
+	while (i < data->area - 1)
 	{
-		if (copy[i] != data->goal_coor[i] && j < size + 1)
+		if (copy[i] != data->goal_coor[i] && j < data->area)
 		{
 			swap_tabint(copy, i, j);
 			j++;
