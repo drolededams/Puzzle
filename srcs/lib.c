@@ -6,20 +6,11 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 15:43:42 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/27 19:59:06 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/28 14:34:35 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/npuzzle.h"
-
-void				swap_tabint(unsigned int *tab, int a, int b)
-{
-	unsigned int tmp;
-
-	tmp = tab[a];
-	tab[a] = tab[b];
-	tab[b] = tmp;
-}
 
 void				func_init(t_puzzle_data *data)
 {

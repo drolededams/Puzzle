@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 12:03:58 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/27 19:54:20 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/28 14:54:23 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void			free_heap(t_heap *heap);
 void			add_node(t_state **root, t_state *state);
 t_state			*search_node(t_state *root, uint64_t id);
 t_state			**mem_hash_table(void);
+void			free_tree(t_state *node);
 
 t_state			*mem_state(uint64_t id, t_state *pre, t_puzzle_data *data);
 void			puz_state(t_state *state, unsigned int area);
@@ -147,7 +148,7 @@ int				move_count(t_state *state);
 void			pre_start_a(t_puzzle_data *data);
 void			start_a(t_heap *heap, uint64_t id_goal, t_state **hash_tab,
 		t_puzzle_data *data);
-void			free_tree(t_state *node);
+void			free_all(t_puzzle_data *data, t_state **hash_tab, t_heap *heap);
 
 unsigned int	manhattan_dist(unsigned int *state, t_puzzle_data *data);
 unsigned int	hamming_dist(unsigned int *state, t_puzzle_data *data);
@@ -159,6 +160,8 @@ int				choice_verif(char *s);
 void			pre_start_a_n(t_puzzle_data *data);
 void			start_a_n(t_heap *heap, uint64_t id_goal, t_state **hash_tab,
 		t_puzzle_data *data);
+void			free_n_all(t_puzzle_data *data, t_state **hash_tab,
+		t_heap *heap);
 
 t_state			*mem_state_n(uint64_t id, unsigned int *coor, t_state *pre,
 		t_puzzle_data *data);

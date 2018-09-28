@@ -6,13 +6,13 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 18:03:06 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/27 19:59:07 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/28 15:01:39 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/npuzzle.h"
 
-t_state		*search_node_n(t_state *root, uint64_t id, unsigned int *coor,
+t_state			*search_node_n(t_state *root, uint64_t id, unsigned int *coor,
 	unsigned int area)
 {
 	if (root)
@@ -27,7 +27,7 @@ t_state		*search_node_n(t_state *root, uint64_t id, unsigned int *coor,
 	return (NULL);
 }
 
-t_state		**mem_hash_table_n(void)
+t_state			**mem_hash_table_n(void)
 {
 	t_state **hash;
 
@@ -36,7 +36,8 @@ t_state		**mem_hash_table_n(void)
 	return (hash);
 }
 
-int			same_state(unsigned int *pre, unsigned int *suc, unsigned int area)
+int				same_state(unsigned int *pre, unsigned int *suc,
+		unsigned int area)
 {
 	unsigned int i;
 
@@ -48,4 +49,27 @@ int			same_state(unsigned int *pre, unsigned int *suc, unsigned int area)
 		i++;
 	}
 	return (1);
+}
+
+unsigned int	hash_table_n(unsigned int *coor, unsigned int *val,
+	unsigned int area)
+{
+	unsigned int hash;
+	unsigned int ze;
+
+	ze = coor[0];
+	if (ze == 0)
+		hash = val[ze + 1];
+	else if (ze == (area - 1))
+	{
+		hash = val[ze - 1];
+		hash = (hash << 8) | ze;
+	}
+	else
+	{
+		hash = val[ze - 1];
+		hash = (hash << 8) | ze;
+		hash = (hash << 8) | val[ze + 1];
+	}
+	return ((97 * hash) & 16777215);
 }

@@ -6,7 +6,7 @@
 /*   By: dgameiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 17:06:27 by dgameiro          #+#    #+#             */
-/*   Updated: 2018/09/27 19:59:05 by dgameiro         ###   ########.fr       */
+/*   Updated: 2018/09/28 14:33:09 by dgameiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,6 @@ char			*file_name(t_puzzle_data *data)
 	str[len + 2] = data->heu_choice + 48;
 	str[len + 3] = '\0';
 	return (str);
-}
-
-int				move_count(t_state *state)
-{
-	int		move;
-	t_state *cpy;
-
-	move = -1;
-	cpy = state;
-	while (cpy != NULL)
-	{
-		move++;
-		cpy = cpy->pre;
-	}
-	return (move);
 }
 
 unsigned int	**state_sort(t_state *state, int n)
